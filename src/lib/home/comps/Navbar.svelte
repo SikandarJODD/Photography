@@ -1,7 +1,10 @@
 <script>
 	import Button from '$lib/components/ui/button/button.svelte';
+	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import HomeIcon from '$lib/images/icons/home.png';
 	import { slide } from 'svelte/transition';
+	import { CameraIcon, Home, ImageIcon, LogIn, User2 } from 'lucide-svelte';
+	import ProfileIcon from '../studio/ProfileIcon.svelte';
 
 	let allData = {
 		title: 'Camero',
@@ -9,23 +12,28 @@
 		navs: [
 			{
 				name: 'Home',
-				link: '/'
+				link: '/',
+				icon: Home
 			},
 			{
 				name: 'Photographers',
-				link: '/'
+				link: '/profiles',
+				icon: CameraIcon
 			},
 			{
 				name: 'Collection',
-				link: '/'
+				link: '/',
+				icon: ImageIcon
 			},
 			{
 				name: 'About Us',
-				link: '/'
+				link: '/',
+				icon: User2
 			}
 		]
 	};
 	let isOpen = false;
+	export let email = '';
 </script>
 
 <header class="bg-white border-b border-slate-400">
@@ -44,25 +52,21 @@
 			{#each allData.navs as item}
 				<a
 					href={item.link}
-					class="text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-300 transition-all duration-200 px-2.5 py-1.5 rounded-md"
+					class="text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-200/60 transition-all duration-200 px-2.5 py-1.5 rounded-md"
 					>{item.name}</a
 				>
 			{/each}
 		</div>
 		<div class="flex flex-1 items-center justify-end gap-x-2">
-			<!-- <a href="/" class="hidden lg:block lg:text-sm lg:font-semibold lg:leading-6 lg:text-gray-900"
-				>Log in</a
-			> -->
-			<!-- <a
-				href="/"
-				class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-				>Sign up</a
-			> -->
-
-			<Button variant="outline" class="border-primary/50 hidden md:flex" href="/login"
-				>Log In</Button
-			>
-			<Button href="/signup">Sign Up</Button>
+			{#if email.length === 0}
+				<!-- content here -->
+				<Button variant="outline" class="border-primary/50 hidden md:flex" href="/login"
+					>Log In</Button
+				>
+				<Button href="/signup">Sign Up</Button>
+			{:else}
+				<ProfileIcon />
+			{/if}
 		</div>
 		<div class="flex lg:hidden">
 			<button
@@ -91,16 +95,17 @@
 	<!-- Mobile menu, show/hide based on menu open state. -->
 	<div class="{isOpen ? 'visible' : 'hidden'} lg:hidden" role="dialog" aria-modal="true">
 		<!-- Background backdrop, show/hide based on slide-over state. -->
-		<div class="{isOpen ? 'visible' : 'hidden'} fixed inset-0 z-10" />
+		<div class="{isOpen ? 'visible ' : 'hidden'} fixed inset-0 z-10" />
 		<div
-			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white p-3 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 		>
 			<div class="flex items-center gap-x-6">
-				<a href="/" class="-m-1.5 p-1.5">
+				<a href="/" class="-m-1.5 p-1.5 flex items-center gap-2">
 					<span class="sr-only">Your Company</span>
-					<img class="h-8 w-auto" src={allData.img} alt="" />
+					<img class="h-8 w-auto" src={allData.img} alt="Logo Title" />
+					<h1 class="font-semibold text-lg">{allData.title}</h1>
 				</a>
-				<Button href="/signup">Sign Up</Button>
+				<Button href="/signup" class="ml-auto">Sign Up</Button>
 				<!-- <a
 					href="/"
 					class="ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -126,23 +131,42 @@
 			</div>
 			<div class="mt-6 flow-root">
 				{#key isOpen}
-					<div class="-my-6 divide-y divide-gray-500/10" in:slide={{ duration: 600 }}>
-						<div class="space-y-2 py-6">
+					<div class="-my-6 flex flex-col justify-between h-[88vh]" in:slide={{ duration: 400 }}>
+						<div class="space-y-1 py-6">
 							{#each allData.navs as item}
 								<a
+									on:click={() => (isOpen = false)}
 									href={item.link}
-									class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-									>{item.name}</a
+									class="-mx-3 flex items-center gap-x-1.5 rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
 								>
+									<div class="flex items-center gap-x-1.5">
+										<svelte:component this={item.icon} strokeWidth="1.3" size="22" />
+										{item.name}
+									</div>
+									{#if item.name === 'Photographers'}
+										<span
+											class="ml-1 inline-flex items-center gap-x-1.5 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700"
+										>
+											<svg class="h-1.5 w-1.5 fill-green-500" viewBox="0 0 6 6" aria-hidden="true">
+												<circle cx="3" cy="3" r="3" />
+											</svg>
+											New
+										</span>
+									{/if}
+								</a>
 							{/each}
 						</div>
-						<div class="py-6">
+						<div class="flex justify-end">
 							<!-- <a
 								href="/"
-								class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-								>Log in</a
+								class="-mx-3 flex items-center gap-x-1.5 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+							>
+								<LogIn strokeWidth="1.3" size="22" />
+								Log in</a
 							> -->
-							<Button href="/login">Log in</Button>
+							<Button href="/login"
+								><LogIn strokeWidth="1.3" size="19" class="mr-2 p-0 " /> Log in</Button
+							>
 						</div>
 					</div>
 				{/key}

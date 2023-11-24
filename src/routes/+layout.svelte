@@ -1,7 +1,14 @@
 <script>
-	import Navbar from "$lib/home/comps/Navbar.svelte";
-import "../app.pcss";
+	import { page } from '$app/stores';
+	import Navbar from '$lib/home/comps/Navbar.svelte';
+	import '../app.pcss';
+	$: routeID = $page.route.id?.split('/') || '/';
+	// Output : ['','(studio)','profiles']
+
+	export let data;
 </script>
 
-<Navbar />
+{#if routeID[1] !== '(studio)'}
+	<Navbar email={data.email} />
+{/if}
 <slot />
