@@ -1,7 +1,7 @@
 // schema.js
-import { pgTable, bigint, varchar } from "drizzle-orm/pg-core";
+import { pgTable, bigint, varchar, numeric, text, serial } from "drizzle-orm/pg-core";
 
-export const user = pgTable("auth_user", {
+export let user = pgTable("auth_user", {
     id: varchar("id", {
         length: 15 // change this when using custom user ids
     }).primaryKey(),
@@ -10,7 +10,7 @@ export const user = pgTable("auth_user", {
     }).notNull(),
     username: varchar("username", {
         length: 40
-    })
+    }).unique()
 });
 
 export const session = pgTable("user_session", {
@@ -43,3 +43,12 @@ export const key = pgTable("user_key", {
         length: 255
     })
 });
+export let profile = pgTable("profile", {
+    id: serial("id").primaryKey().notNull(),
+    username: text("username").references(() => user.username),
+    firstName: text("firstName"),
+    desc: text("description"),
+    userImage: text("user_image"),
+    followers: numeric("followers"),
+    totalImages: numeric("total_images")
+})

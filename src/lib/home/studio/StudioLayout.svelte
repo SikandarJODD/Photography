@@ -3,27 +3,14 @@
 	import { page } from '$app/stores';
 	import {
 		BellDot,
-		CalendarCheck2,
-		Files,
-		FolderClosed,
 		Home,
 		Image,
-		ImageDown,
 		ImagePlus,
-		Layout,
-		LayoutGrid,
 		LogOut,
-		PieChart,
-		PlusCircle,
-		PlusSquare,
-		SaveAllIcon,
-		SaveIcon,
 		Settings,
 		SparkleIcon,
-		StarIcon,
-		Upload,
-		UploadCloud,
 		User,
+		UserCheck,
 		Users
 	} from 'lucide-svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
@@ -36,8 +23,8 @@
 			icon: Home
 		},
 		{
-			name: 'Profiles',
-			link: '',
+			name: 'Photographers',
+			link: '/profiles',
 			icon: Users
 		},
 		{
@@ -51,9 +38,9 @@
 			icon: SparkleIcon
 		},
 		{
-			name: 'Dashobard',
-			link: '',
-			icon: LayoutGrid
+			name: 'Profile',
+			link: '/profile',
+			icon: UserCheck
 		},
 		{
 			name: 'create',
@@ -78,24 +65,6 @@
 			icon: 'S'
 		}
 	];
-	let isProfileMenuOpen = false;
-	let profileTabs = [
-		{
-			name: 'Your Profile',
-			link: '#',
-			icon: User
-		},
-		{
-			name: 'Settings',
-			link: '#',
-			icon: Settings
-		},
-		{
-			name: 'Sign out',
-			link: '#',
-			icon: LogOut
-		}
-	];
 	let webdata = {
 		img: 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500',
 		profileName: 'Saloni Maheshwari',
@@ -105,7 +74,7 @@
 		topic: 'Dashboard'
 	};
 	let input = '';
-	$: routeID = $page.route.id;
+	$: routeID = $page.route.id?.split('/') || '/';
 
 	export let email = '';
 </script>
@@ -335,7 +304,9 @@
 
 	<div class="lg:pl-64">
 		<div
-			class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+			class="{routeID[2] === 'profile'
+				? 'md:hidden'
+				: ''} sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
 		>
 			<button
 				type="button"
@@ -362,7 +333,7 @@
 			<!-- Separator -->
 			<div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
-			<div class="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
+			<div class=" flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
 				<form class="relative flex flex-1" action="#" method="GET">
 					<label for="search-field" class="sr-only">Search</label>
 					<svg

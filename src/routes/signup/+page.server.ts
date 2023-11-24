@@ -3,6 +3,8 @@ import { fail, redirect } from "@sveltejs/kit";
 
 
 import type { PageServerLoad, Actions } from "./$types";
+import { profile } from "$lib/server/schema";
+import { db } from "$lib/server";
 
 export const load: PageServerLoad = async ({ locals }) => {
     const session = await locals.auth.validate();
@@ -50,6 +52,11 @@ export const actions: Actions = {
                     username: String(username)
                 },
             });
+            await db.insert(profile).values(
+                {
+                    username: String(username)
+                }
+            )
             const session = await auth.createSession({
                 userId: user.userId,
                 attributes: {}

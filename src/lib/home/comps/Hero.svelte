@@ -32,10 +32,10 @@
 						</div>
 					</div>
 					<div
-						class="mt-14 flex justify-center md:justify-end gap-3 md:gap-6 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 lg:-ml-16"
+						class="mt-14 flex justify-center md:justify-end md:gap-6 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 lg:-ml-16"
 					>
 						<div
-							class="hidden md:flex ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
+							class="hidden xl:flex ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
 						>
 							<div class="relative">
 								<img
@@ -49,7 +49,7 @@
 							</div>
 						</div>
 						<div
-							class="md:mr-auto w-44 md:w-48 flex-none space-y-3 md:space-y-6 sm:mr-0 sm:pt-52 lg:pt-32"
+							class="md:mr-auto w-44 md:w-48 flex-none space-y-3 md:space-y-6 sm:mr-0 sm:pt-52 lg:pt-32 px-1 md:px-0"
 						>
 							<div class="relative">
 								<img
@@ -72,10 +72,10 @@
 								/>
 							</div>
 						</div>
-						<div class="w-44 flex-none space-y-3 md:space-y-6 md:mr-0 pt-0 sm:pt-0">
+						<div class="w-44 flex-none space-y-3 md:space-y-6 md:mr-0 pt-0 sm:pt-0 px-1 md:px-0">
 							<div class="relative">
 								<img
-									src="https://i.pinimg.com/564x/f1/f8/39/f1f839cf6dff6d4133f13e43fdc5d446.jpg"
+									src="https://i.pinimg.com/564x/f1/f8/39/f1f839cf6dff6d4133f13e43fdc5d446.jpg "
 									alt=""
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
