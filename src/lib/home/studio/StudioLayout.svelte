@@ -2,48 +2,63 @@
 	import ProfileIcon from './ProfileIcon.svelte';
 	import { page } from '$app/stores';
 	import {
+		BellDot,
 		CalendarCheck2,
 		Files,
 		FolderClosed,
 		Home,
+		Image,
+		ImageDown,
+		ImagePlus,
+		Layout,
+		LayoutGrid,
 		LogOut,
 		PieChart,
+		PlusCircle,
+		PlusSquare,
+		SaveAllIcon,
+		SaveIcon,
 		Settings,
+		SparkleIcon,
+		StarIcon,
+		Upload,
+		UploadCloud,
 		User,
 		Users
 	} from 'lucide-svelte';
+	import Button from '$lib/components/ui/button/button.svelte';
 
 	let isMobileMenu = false;
 	let layoutNavs = [
 		{
-			name: 'Dashboard',
+			name: 'Home',
 			link: '/',
 			icon: Home
 		},
 		{
-			name: 'Projects',
-			link: '',
-			icon: FolderClosed
-		},
-		{
-			name: 'Teams',
+			name: 'Profiles',
 			link: '',
 			icon: Users
 		},
 		{
-			name: 'Documents',
+			name: 'Photos',
 			link: '',
-			icon: Files
+			icon: Image
 		},
 		{
-			name: 'Reports',
+			name: 'Saved',
 			link: '',
-			icon: PieChart
+			icon: SparkleIcon
 		},
 		{
-			name: 'Calendar',
+			name: 'Dashobard',
 			link: '',
-			icon: CalendarCheck2
+			icon: LayoutGrid
+		},
+		{
+			name: 'create',
+			link: '',
+			icon: ImagePlus
 		}
 	];
 	let teams = [
@@ -91,10 +106,11 @@
 	};
 	let input = '';
 	$: routeID = $page.route.id;
+
+	export let email = '';
 </script>
 
 <div>
-	<!-- Off-canvas menu for mobile, show/hide based on off-canvas menu state. -->
 	<div
 		class="{isMobileMenu
 			? 'opacity-100 transition-opacity ease-linear duration-300'
@@ -152,9 +168,9 @@
 												href={item.link}
 												class="{routeID === item.link
 													? 'bg-gray-800 text-white'
-													: 'text-gray-400 hover:text-white hover:bg-gray-800'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+													: 'text-gray-400 hover:text-white capitalize hover:bg-gray-800'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
 											>
-												<svelte:component this={item.icon} />
+												<svelte:component this={item.icon} strokeWidth="1.3" />
 												{item.name}
 											</a>
 										</li>
@@ -218,7 +234,7 @@
 	</div>
 
 	<!-- Static sidebar for desktop -->
-	<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
+	<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col">
 		<!-- Sidebar component, swap this element with another sidebar if you like -->
 		<div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
 			<div class="flex h-16 shrink-0 items-center">
@@ -229,18 +245,37 @@
 					<li>
 						<ul role="list" class="-mx-2 space-y-1">
 							{#each layoutNavs as item}
+								<!-- {#if item.name === 'create'}
+									<li>
+										<a
+											href={item.link}
+											class="{routeID === item.link
+												? 'bg-gray-800 text-white transition-all duration-150'
+												: 'text-sky-400 group shadow-md shadow-sky-800/40  hover:bg-sky-800/20  bg-sky-800/40 border border-sky-400   transition-all duration-150'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold capitalize"
+										>
+											<svelte:component
+												this={item.icon}
+												strokeWidth="1.34"
+												size="22"
+												class="group-hover:rotate-[25deg] transition-all duration-500 "
+											/>
+											{item.name}
+										</a>
+									</li>
+								{:else} -->
 								<li>
 									<!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
 									<a
 										href={item.link}
 										class="{routeID === item.link
 											? 'bg-gray-800 text-white transition-all duration-150'
-											: 'text-gray-400 hover:text-white hover:bg-gray-800 transition-all duration-150'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold"
+											: 'text-gray-400 hover:text-white hover:bg-sky-800/30 transition-all duration-150'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold capitalize"
 									>
 										<svelte:component this={item.icon} strokeWidth="1.34" size="22" />
 										{item.name}
 									</a>
 								</li>
+								<!-- {/if} -->
 							{/each}
 						</ul>
 					</li>
@@ -298,7 +333,7 @@
 		</div>
 	</div>
 
-	<div class="lg:pl-72">
+	<div class="lg:pl-64">
 		<div
 			class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
 		>
@@ -352,29 +387,23 @@
 					/>
 				</form>
 				<div class="flex items-center gap-x-4 lg:gap-x-6">
-					<button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-500">
+					<button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-800">
 						<span class="sr-only">View notifications</span>
-						<svg
-							class="h-6 w-6"
-							fill="none"
-							viewBox="0 0 24 24"
-							stroke-width="1.5"
-							stroke="currentColor"
-							aria-hidden="true"
-						>
-							<path
-								stroke-linecap="round"
-								stroke-linejoin="round"
-								d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0"
-							/>
-						</svg>
+						<BellDot strokeWidth="1.5" />
 					</button>
 
 					<!-- Separator -->
 					<div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true" />
 
 					<!-- Profile dropdown -->
-					<ProfileIcon></ProfileIcon>
+					{#if email === ''}
+						<Button href="/login" size="sm"
+							><User strokeWidth="1.3" size="16" class="mr-1" /> Login</Button
+						>
+					{:else}
+						<ProfileIcon />
+						<!-- content here -->
+					{/if}
 				</div>
 			</div>
 		</div>

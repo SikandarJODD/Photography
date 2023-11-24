@@ -1,8 +1,9 @@
 <script>
 	import { page } from '$app/stores';
 	import StudioLayout from '$lib/home/studio/StudioLayout.svelte';
+	export let data;
 </script>
 
-<StudioLayout>
+<StudioLayout email={data.email}>
 	<slot />
 </StudioLayout>

@@ -1,75 +1,45 @@
+<script>
+	import Button from '$lib/components/ui/button/button.svelte';
+	import { Image, Users } from 'lucide-svelte';
+	import imgsIcon from '$lib/images/icons/imagesicon.png';
+</script>
+
 <div class="bg-white">
 	<div class="relative isolate">
-		<svg
-			class="absolute inset-x-0 top-0 -z-10 h-[64rem] w-full stroke-gray-200 [mask-image:radial-gradient(32rem_32rem_at_center,white,transparent)]"
-			aria-hidden="true"
-		>
-			<defs>
-				<pattern
-					id="1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84"
-					width="200"
-					height="200"
-					x="50%"
-					y="-1"
-					patternUnits="userSpaceOnUse"
-				>
-					<path d="M.5 200V.5H200" fill="none" />
-				</pattern>
-			</defs>
-			<svg x="50%" y="-1" class="overflow-visible fill-gray-50">
-				<path
-					d="M-200 0h201v201h-201Z M600 0h201v201h-201Z M-400 600h201v201h-201Z M200 800h201v201h-201Z"
-					stroke-width="0"
-				/>
-			</svg>
-			<rect
-				width="100%"
-				height="100%"
-				stroke-width="0"
-				fill="url(#1f932ae7-37de-4c0a-a8b0-a6e3b4d44b84)"
-			/>
-		</svg>
-		<div
-			class="absolute left-1/2 right-0 top-0 -z-10 -ml-24 transform-gpu overflow-hidden blur-3xl lg:ml-24 xl:ml-48"
-			aria-hidden="true"
-		>
-			<div
-				class="aspect-[801/1036] w-[50.0625rem] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30"
-				style="clip-path: polygon(63.1% 29.5%, 100% 17.1%, 76.6% 3%, 48.4% 0%, 44.6% 4.7%, 54.5% 25.3%, 59.8% 49%, 55.2% 57.8%, 44.4% 57.2%, 27.8% 47.9%, 35.1% 81.5%, 0% 97.7%, 39.2% 100%, 35.2% 81.4%, 97.2% 52.8%, 63.1% 29.5%)"
-			/>
-		</div>
 		<div class="overflow-hidden">
-			<div class="mx-auto max-w-7xl px-6 pb-32 pt-5 sm:pt-5 lg:px-8 lg:pt-3">
-				<div class="mx-auto max-w-2xl gap-x-14 lg:mx-0 lg:flex lg:max-w-none lg:items-center">
-					<div class="w-full max-w-xl lg:shrink-0 xl:max-w-2xl">
-						<h1 class="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-							We’re changing the way people connect.
+			<div class="mx-auto max-w-7xl px-7 md:px-6 pb-32 pt-5 sm:pt-5 lg:px-8 lg:pt-6">
+				<div class="mx-auto max-w-2xl lg:mx-0 lg:flex lg:max-w-none lg:items-center">
+					<div class=" w-full max-w-xl lg:shrink-0 xl:max-w-3xl lg:mb-56">
+						<h1
+							class="pattern-dots-sm gray-lighter text-center md:text-left text-4xl lg:text-6xl font-bold tracking-tight text-gray-900 sm:text-6xl px-1 py-3 md:p-3 shadow_title border border-primary capitalize mainTitle"
+						>
+							When I photograph I make love.
 						</h1>
-						<p class="relative mt-6 text-lg leading-8 text-gray-600 sm:max-w-md lg:max-w-none">
-							Cupidatat minim id magna ipsum sint dolor qui. Sunt sit in quis cupidatat mollit aute
-							velit. Et labore commodo nulla aliqua proident mollit ullamco exercitation tempor.
-							Sint aliqua anim nulla sunt mollit id pariatur in voluptate cillum.
+						<p
+							class="relative mt-6 lg:my-8 text-lg leading-8 text-gray-500/80 sm:max-w-md lg:max-w-none lg:text-xl subtitle"
+						>
+							The art of <span class="text-primary">photography</span> is all about directing the attention
+							of the viewer.
 						</p>
-						<div class="mt-10 flex items-center gap-x-6">
-							<a
-								href="#"
-								class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-								>Get started</a
+						<div class="mt-10 flex items-center justify-center md:justify-start gap-x-2 md:gap-x-6">
+							<Button size="lg"
+								><Users size="20" strokeWidth="1.3" class="mr-1.5" /> Profiles</Button
 							>
-							<a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-								>Live demo <span aria-hidden="true">→</span></a
-							>
+							<Button size="lg"><Image size="20" strokeWidth="1.3" class="mr-1.5" />Moments</Button>
+							<!-- <Button size="lg" variant="outline" class="border border-primary"
+								><img src={imgsIcon} class="h-6 w-6 mr-2" alt="imagesicon" /> Moments</Button
+							> -->
 						</div>
 					</div>
 					<div
-						class="mt-14 flex justify-end gap-8 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0"
+						class="mt-14 flex justify-center md:justify-end gap-3 md:gap-6 sm:-mt-44 sm:justify-start sm:pl-20 lg:mt-0 lg:pl-0 lg:-ml-16"
 					>
 						<div
-							class="ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
+							class="hidden md:flex ml-auto w-44 flex-none space-y-8 pt-32 sm:ml-0 sm:pt-80 lg:order-last lg:pt-36 xl:order-none xl:pt-80"
 						>
 							<div class="relative">
 								<img
-									src="https://images.unsplash.com/photo-1557804506-669a67965ba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
+									src="https://i.pinimg.com/564x/76/c9/7e/76c97e7331503011369f148eda57166c.jpg"
 									alt=""
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
@@ -78,12 +48,14 @@
 								/>
 							</div>
 						</div>
-						<div class="mr-auto w-44 flex-none space-y-8 sm:mr-0 sm:pt-52 lg:pt-36">
+						<div
+							class="md:mr-auto w-44 md:w-48 flex-none space-y-3 md:space-y-6 sm:mr-0 sm:pt-52 lg:pt-32"
+						>
 							<div class="relative">
 								<img
-									src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
+									src="https://i.pinimg.com/564x/85/5a/a4/855aa454d29a158207932db836f0c8a6.jpg"
 									alt=""
-									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
+									class="aspect-[2/3] w-full rounded-xl object-cover shadow-md"
 								/>
 								<div
 									class="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10"
@@ -91,7 +63,7 @@
 							</div>
 							<div class="relative">
 								<img
-									src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=focalpoint&fp-x=.4&w=396&h=528&q=80"
+									src="https://i.pinimg.com/564x/81/a9/1e/81a91e4a8097632e374a17459ff6a7d6.jpg"
 									alt=""
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
@@ -100,10 +72,10 @@
 								/>
 							</div>
 						</div>
-						<div class="w-44 flex-none space-y-8 pt-32 sm:pt-0">
+						<div class="w-44 flex-none space-y-3 md:space-y-6 md:mr-0 pt-0 sm:pt-0">
 							<div class="relative">
 								<img
-									src="https://images.unsplash.com/photo-1670272504528-790c24957dda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&crop=left&w=400&h=528&q=80"
+									src="https://i.pinimg.com/564x/f1/f8/39/f1f839cf6dff6d4133f13e43fdc5d446.jpg"
 									alt=""
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
@@ -113,7 +85,7 @@
 							</div>
 							<div class="relative">
 								<img
-									src="https://images.unsplash.com/photo-1670272505284-8faba1c31f7d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&h=528&q=80"
+									src="https://i.pinimg.com/564x/41/f0/cb/41f0cb9e6950ab91f50c17ab787ac29a.jpg"
 									alt=""
 									class="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
 								/>
@@ -128,3 +100,18 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&family=Poppins:wght@300;500&display=swap');
+
+	.subtitle {
+		font-family: 'Poppins', sans-serif;
+		font-weight: 300;
+	}
+	.mainTitle {
+		font-family: 'Nunito', sans-serif;
+	}
+	.shadow_title {
+		box-shadow: -10px 10px yellow;
+	}
+</style>
