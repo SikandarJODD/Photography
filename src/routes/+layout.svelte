@@ -3,10 +3,10 @@
 	import Navbar from '$lib/home/comps/Navbar.svelte';
 	import '../app.pcss';
 	$: routeID = $page.route.id?.split('/') || '/';
-	let email = $page.data.email;
+	export let data;
 </script>
 
 {#if routeID[1] !== '(studio)'}
-	<Navbar {email} />
+	<Navbar email={data.email} />
 {/if}
 <slot />

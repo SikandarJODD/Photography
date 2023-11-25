@@ -1,7 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
-	import { emailStatus } from '$lib/state';
 	import { LogOut, Settings, User } from 'lucide-svelte';
+	import { scale } from 'svelte/transition';
 
 	let isProfileMenuOpen = false;
 	let webdata = {
@@ -62,49 +62,44 @@
 			</svg>
 		</span>
 	</button>
-	<div
-		class="{isProfileMenuOpen
-			? 'transform opacity-100 scale-100 transition ease-out duration-100'
-			: 'transform opacity-0 scale-95 transition ease-out duration-100'} absolute right-0 z-10 mt-2.5 w-36 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
-		role="menu"
-		aria-orientation="vertical"
-		aria-labelledby="user-menu-button"
-		tabindex="-1"
-	>
-		<!-- Active: "bg-gray-50", Not Active: "" -->
-		{#each profileTabs as item, i}
-			{#if item.name === 'logout'}
-				<form
-					method="POST"
-					use:enhance
-					action="/?/logout"
-					on:submit|preventDefault={() => {
-						emailStatus.set('');
-					}}
-				>
-					<button
-						type="submit"
-						class="w-full outline-none flex gap-1.5 items-center px-3 py-1.5 text-sm leading-6 text-gray-900 hover:bg-gray-50 hover:text-blue-500 transition-all duration-100"
+	{#key isProfileMenuOpen}
+		<div
+			class="{isProfileMenuOpen
+				? 'transform opacity-100 scale-100 transition ease-out duration-100 visible'
+				: 'transform opacity-0 scale-95 transition ease-out duration-100 hidden'} absolute right-0 z-10 mt-2.5 w-36 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none"
+			role="menu"
+			aria-orientation="vertical"
+			aria-labelledby="user-menu-button"
+			tabindex="-1"
+			in:scale={{ duration: 300 }}
+		>
+			{#each profileTabs as item, i}
+				{#if item.name === 'logout'}
+					<form method="POST" use:enhance action="/?/logout">
+						<button
+							type="submit"
+							class="w-full outline-none flex gap-1.5 items-center px-3 py-1.5 text-sm leading-6 text-gray-900 hover:bg-gray-50 hover:text-blue-500 transition-all duration-100"
+							role="menuitem"
+							tabindex="-1"
+							id="user-menu-item-{i}"
+						>
+							<svelte:component this={item.icon} size="18" strokeWidth="1.3" />
+							<div class="mb-0.5">{item.name}</div></button
+						>
+					</form>
+				{:else}
+					<a
+						href={item.link}
+						class="flex gap-1.5 items-center px-3 py-1.5 text-sm leading-6 text-gray-900 hover:bg-gray-50 hover:text-blue-500 transition-all duration-100"
 						role="menuitem"
 						tabindex="-1"
 						id="user-menu-item-{i}"
 					>
 						<svelte:component this={item.icon} size="18" strokeWidth="1.3" />
-						<div class="mb-0.5">{item.name}</div></button
+						<div class="mb-0.5">{item.name}</div></a
 					>
-				</form>
-			{:else}
-				<a
-					href={item.link}
-					class="flex gap-1.5 items-center px-3 py-1.5 text-sm leading-6 text-gray-900 hover:bg-gray-50 hover:text-blue-500 transition-all duration-100"
-					role="menuitem"
-					tabindex="-1"
-					id="user-menu-item-{i}"
-				>
-					<svelte:component this={item.icon} size="18" strokeWidth="1.3" />
-					<div class="mb-0.5">{item.name}</div></a
-				>
-			{/if}
-		{/each}
-	</div>
+				{/if}
+			{/each}
+		</div>
+	{/key}
 </div>

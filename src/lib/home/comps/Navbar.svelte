@@ -3,7 +3,7 @@
 	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import HomeIcon from '$lib/images/icons/home.png';
 	import { slide } from 'svelte/transition';
-	import { CameraIcon, Home, ImageIcon, LogIn, User2 } from 'lucide-svelte';
+	import { CameraIcon, Home, ImageIcon, LogIn, Menu, User2, X } from 'lucide-svelte';
 	import ProfileIcon from '../studio/ProfileIcon.svelte';
 	import ToggleMode from '$lib/home/comps/ToggleMode.svelte';
 	import { emailStatus } from '$lib/state';
@@ -62,7 +62,6 @@
 		<div class="flex flex-1 items-center justify-end gap-x-2">
 			{#if email.length === 0}
 				<!-- content here -->
-				<ToggleMode />
 				<Button variant="outline" class="border-primary/50 hidden md:flex" href="/login"
 					>Log In</Button
 				>
@@ -78,20 +77,7 @@
 				on:click={() => (isOpen = true)}
 			>
 				<span class="sr-only">Open main menu</span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-					/>
-				</svg>
+				<Menu strokeWidth="1.6" />
 			</button>
 		</div>
 	</nav>
@@ -100,35 +86,31 @@
 		<!-- Background backdrop, show/hide based on slide-over state. -->
 		<div class="{isOpen ? 'visible ' : 'hidden'} fixed inset-0 z-10" />
 		<div
-			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white p-3 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
+			class="fixed inset-y-0 right-0 z-10 w-full overflow-y-auto bg-white dark:bg-gray-900 p-3 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10"
 		>
-			<div class="flex items-center gap-x-6">
+			<div class="flex items-center {email !== '' ? 'justify-between' : ''}  gap-x-6">
 				<a href="/" class="-m-1.5 p-1.5 flex items-center gap-2">
 					<span class="sr-only">Your Company</span>
 					<img class="h-8 w-auto" src={allData.img} alt="Logo Title" />
-					<h1 class="font-semibold text-lg">{allData.title}</h1>
+					<h1 class="font-semibold text-lg text-primary">{allData.title}</h1>
 				</a>
-				<!-- <ToggleMode /> -->
-				<Button href="/signup" class="ml-auto">Sign Up</Button>
+				{#if email.length === 0}
+					<Button href="/signup" class="ml-auto">Sign Up</Button>
+				{:else}
+					<div class="ml-auto">
+						<ProfileIcon />
+					</div>
+				{/if}
 				<button
 					type="button"
 					class="-m-2.5 rounded-md p-2.5 text-gray-700"
 					on:click={() => (isOpen = false)}
 				>
 					<span class="sr-only">Close menu</span>
-					<svg
-						class="h-6 w-6"
-						fill="none"
-						viewBox="0 0 24 24"
-						stroke-width="1.5"
-						stroke="currentColor"
-						aria-hidden="true"
-					>
-						<path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-					</svg>
+					<X strokeWidth="1.6" />
 				</button>
 			</div>
-			<div class="mt-6 flow-root">
+			<div class="mt-5 flow-root">
 				{#key isOpen}
 					<div class="-my-6 flex flex-col h-[88vh]" in:slide={{ duration: 400 }}>
 						<div class="space-y-1 py-6">
@@ -136,7 +118,7 @@
 								<a
 									on:click={() => (isOpen = false)}
 									href={item.link}
-									class="-mx-3 flex items-center gap-x-1.5 rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+									class="-mx-3 flex items-center gap-x-1.5 rounded-lg px-3 py-2 text-base font-semibold leading-7 text-primary hover:bg-gray-50"
 								>
 									<div class="flex items-center gap-x-1.5">
 										<svelte:component this={item.icon} strokeWidth="1.3" size="22" />
@@ -155,10 +137,13 @@
 								</a>
 							{/each}
 						</div>
-						<div class="flex justify-end">
-							<Button href="/login"
-								><LogIn strokeWidth="1.3" size="19" class="mr-2 p-0 " /> Log in</Button
-							>
+						<div class="flex justify-end gap-x-2">
+							<ToggleMode />
+							{#if email.length === 0}
+								<Button href="/login" on:click={() => (isOpen = false)}
+									><LogIn strokeWidth="1.3" size="19" class="mr-2 p-0 " /> Log in</Button
+								>
+							{/if}
 						</div>
 					</div>
 				{/key}
