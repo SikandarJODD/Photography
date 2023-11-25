@@ -1,5 +1,113 @@
 <script>
-	import EditPage from '$lib/home/studio/edit/EditPage.svelte';
+	import { enhance } from '$app/forms';
+	import Button from '$lib/components/ui/button/button.svelte';
+	import Input from '$lib/components/ui/input/input.svelte';
+	import Label from '$lib/components/ui/label/label.svelte';
+	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import userIcon from '$lib/images/icons/userIcon.jpg';
+	import { Save, Upload } from 'lucide-svelte';
+	let avatar, fileinput;
+	const onFileSelected = (e) => {
+		let image = e.target.files[0];
+		let reader = new FileReader();
+		reader.readAsDataURL(image);
+		reader.onload = (e) => {
+			avatar = e.target.result;
+		};
+	};
 </script>
 
-<EditPage />
+<form method="post" use:enhance>
+	<div class="dark:bg-gray-950">
+		<div class="border-b border-white/10 pb-8">
+			<h2 class="text-xl font-semibold leading-7 text-primary md:font-bold lg:text-3xl">
+				Edit Profile
+			</h2>
+			<p class="mt-1 text-sm leading-6 text-primary/70">
+				This information will be displayed publicly so be careful what you share.
+			</p>
+
+			<div class="mt-4 md:mt-8 flex flex-col gap-4">
+				<div class="grid gap-4 grid-cols-1 md:grid-cols-4">
+					<div>
+						<Label>Name</Label>
+						<div class="mt-2">
+							<Input placeholder="Your Name" name="name" id="name" />
+						</div>
+					</div>
+					<!-- <div>
+						<Label>Username</Label>
+						<div class="mt-2">
+							<Input placeholder="@aditya" name="username" id="username" />
+						</div>
+					</div> -->
+				</div>
+				<div class="col-span-full">
+					<label for="about" class="block text-sm font-medium leading-6 text-primary">About</label>
+					<div class="mt-2">
+						<Textarea
+							placeholder="Short description of yourself...."
+							class="max-w-lg"
+							name="desc"
+							id="desc"
+							rows="7"
+						/>
+					</div>
+				</div>
+
+				<div class="col-span-full">
+					<label for="photo" class="block text-sm font-medium leading-6 text-primary"
+						>Profile Photo</label
+					>
+					<div
+						class="mt-2 flex items-center gap-3 justify-center md:justify-start flex-col md:flex-row"
+					>
+						<div>
+							{#if avatar}
+								<!-- content here -->
+								<img
+									src={avatar}
+									alt="user icon"
+									class="rounded-full h-24 w-24 transition-all duration-200 p-1 border-2 border-blue-400 object-cover object-center"
+								/>
+							{:else}
+								<img
+									src={userIcon}
+									alt="user icon"
+									class="rounded-full p-0.5 h-16 w-16 border-2 border-blue-400"
+								/>
+							{/if}
+						</div>
+
+						<Button
+							size="sm"
+							on:click={() => {
+								fileinput.click();
+							}}
+						>
+							<Upload size="18" strokeWidth="1.3" class="mr-1" />
+							Upload Image</Button
+						>
+						<input
+							name="inputImage"
+							id="inputImage"
+							style="display:none"
+							type="file"
+							accept=".jpg, .jpeg, .png"
+							on:change={(e) => onFileSelected(e)}
+							bind:this={fileinput}
+						/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="mt-6 flex items-center justify-end gap-x-4">
+		<!-- <Button>Cancel</Button> -->
+		<Button type="submit">
+			<Save strokeWidth="1.3" class="mr-1" size="20" />
+			Save</Button
+		>
+	</div>
+</form>
