@@ -302,9 +302,9 @@
 		</div>
 	</div>
 
-	<div class="lg:pl-64">
+	<div class="lg:pl-60">
 		<div
-			class="{routeID[2] === 'profile'
+			class="{routeID[2] === 'profile' || routeID[2] === 'edit'
 				? 'md:hidden'
 				: ''} sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
 		>
@@ -379,9 +379,8 @@
 			</div>
 		</div>
 
-		<main class="py-10">
+		<main class="py-10 bg-gray-50 dark:bg-gray-950">
 			<div class="px-4 sm:px-6 lg:px-8">
-				<!-- Your content -->
 				<slot />
 			</div>
 		</main>

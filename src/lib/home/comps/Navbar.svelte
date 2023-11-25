@@ -5,6 +5,7 @@
 	import { slide } from 'svelte/transition';
 	import { CameraIcon, Home, ImageIcon, LogIn, User2 } from 'lucide-svelte';
 	import ProfileIcon from '../studio/ProfileIcon.svelte';
+	import ToggleMode from '$lib/home/comps/ToggleMode.svelte';
 
 	let allData = {
 		title: 'Camero',
@@ -36,7 +37,7 @@
 	export let email = '';
 </script>
 
-<header class="bg-white border-b border-slate-400">
+<header class="bg-white dark:bg-gray-900 border-b border-slate-400">
 	<nav
 		class="mx-auto flex max-w-7xl items-center justify-between gap-x-6 p-3 lg:px-8"
 		aria-label="Global"
@@ -52,7 +53,7 @@
 			{#each allData.navs as item}
 				<a
 					href={item.link}
-					class="text-sm font-semibold leading-6 text-gray-900 hover:bg-gray-200/60 transition-all duration-200 px-2.5 py-1.5 rounded-md"
+					class="text-sm font-semibold leading-6 text-gray-900 dark:text-gray-50 hover:bg-gray-200/80 dark:hover:bg-gray-700/40 transition-all duration-200 px-2.5 py-1.5 rounded-md"
 					>{item.name}</a
 				>
 			{/each}
@@ -60,6 +61,7 @@
 		<div class="flex flex-1 items-center justify-end gap-x-2">
 			{#if email.length === 0}
 				<!-- content here -->
+				<ToggleMode />
 				<Button variant="outline" class="border-primary/50 hidden md:flex" href="/login"
 					>Log In</Button
 				>
@@ -105,12 +107,8 @@
 					<img class="h-8 w-auto" src={allData.img} alt="Logo Title" />
 					<h1 class="font-semibold text-lg">{allData.title}</h1>
 				</a>
+				<!-- <ToggleMode /> -->
 				<Button href="/signup" class="ml-auto">Sign Up</Button>
-				<!-- <a
-					href="/"
-					class="ml-auto rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-					>Sign up</a
-				> -->
 				<button
 					type="button"
 					class="-m-2.5 rounded-md p-2.5 text-gray-700"
@@ -131,7 +129,7 @@
 			</div>
 			<div class="mt-6 flow-root">
 				{#key isOpen}
-					<div class="-my-6 flex flex-col justify-between h-[88vh]" in:slide={{ duration: 400 }}>
+					<div class="-my-6 flex flex-col h-[88vh]" in:slide={{ duration: 400 }}>
 						<div class="space-y-1 py-6">
 							{#each allData.navs as item}
 								<a
@@ -157,13 +155,6 @@
 							{/each}
 						</div>
 						<div class="flex justify-end">
-							<!-- <a
-								href="/"
-								class="-mx-3 flex items-center gap-x-1.5 rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
-							>
-								<LogIn strokeWidth="1.3" size="22" />
-								Log in</a
-							> -->
 							<Button href="/login"
 								><LogIn strokeWidth="1.3" size="19" class="mr-2 p-0 " /> Log in</Button
 							>

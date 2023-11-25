@@ -22,12 +22,11 @@
 	];
 	let btnsize = 'sm';
 	let screenwidth = 0;
-	$: console.log(screenwidth);
 </script>
 
 <svelte:window bind:innerWidth={screenwidth} />
 <div>
-	<div class="grid grid-cols-8 space-x-1 md:space-x-6 xl:space-x-0 lg:grid-cols-5 xl:px-32">
+	<div class="grid grid-cols-8 space-x-1 md:space-x-6 xl:space-x-0 lg:grid-cols-5 xl:px-32 mb-4">
 		<div class="col-span-2 lg:col-span-1">
 			<img
 				src="https://i.pinimg.com/564x/26/82/78/2682787e9d8241a3164a67748ac505b6.jpg"
