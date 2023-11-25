@@ -6,12 +6,14 @@ export const load: LayoutServerLoad = async ({ locals }) => {
     const session = await locals.auth.validate();
     if (session) {
         return {
-            email: session.user.email
+            email: session.user.email,
+            username: session.user.username
         };
     }
     else {
         return {
-            email: ''
+            email: '',
+            username: ''
         };
     }
 };
