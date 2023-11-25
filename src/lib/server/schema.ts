@@ -49,6 +49,6 @@ export let profile = pgTable("profile", {
     firstName: text("firstName"),
     desc: text("description"),
     userImage: text("user_image"),
-    followers: numeric("followers"),
-    totalImages: numeric("total_images")
+    followers: numeric("followers").default('0'),
+    totalImages: numeric("total_images").default('0')
 })

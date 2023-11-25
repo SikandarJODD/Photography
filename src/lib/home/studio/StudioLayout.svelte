@@ -15,6 +15,8 @@
 	} from 'lucide-svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import Input from '$lib/components/ui/input/input.svelte';
+	import HomeIcon from '$lib/images/icons/home.png';
+	import { emailStatus } from '$lib/state';
 
 	let isMobileMenu = false;
 	let layoutNavs = [
@@ -67,12 +69,13 @@
 		}
 	];
 	let webdata = {
-		img: 'https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500',
+		img: HomeIcon,
 		profileName: 'Saloni Maheshwari',
 		email: 'Tom Cook',
 		profileImg: 'https://i.pinimg.com/564x/88/db/6f/88db6fd38202de80d7c7c3964783cb04.jpg',
 		profileLink: '#',
-		topic: 'Dashboard'
+		topic: 'Dashboard',
+		webname: 'Camero'
 	};
 	let input = '';
 	$: routeID = $page.route.id?.split('/') || '/';
@@ -124,8 +127,9 @@
 				<div
 					class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4 ring-1 ring-white/10"
 				>
-					<div class="flex h-16 shrink-0 items-center">
+					<div class="flex h-16 shrink-0 items-center gap-2 border-b border-gray-400">
 						<img class="h-8 w-auto" src={webdata.img} alt="Your Company" />
+						<h1 class="text-white font-bold text-xl">{webdata.webname}</h1>
 					</div>
 					<nav class="flex flex-1 flex-col">
 						<ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -208,8 +212,9 @@
 	<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col">
 		<!-- Sidebar component, swap this element with another sidebar if you like -->
 		<div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
-			<div class="flex h-16 shrink-0 items-center">
+			<div class="flex h-16 shrink-0 items-center gap-2">
 				<img class="h-8 w-auto" src={webdata.img} alt="Your Company" />
+				<h1 class="text-white font-bold text-xl">{webdata.webname}</h1>
 			</div>
 			<nav class="flex flex-1 flex-col">
 				<ul role="list" class="flex flex-1 flex-col gap-y-7">

@@ -1,5 +1,4 @@
-<script>
-	import Comp from '$lib/comp.svelte';
+<script lang="ts">
 	import Hero from '$lib/home/comps/Hero.svelte';
 </script>
 

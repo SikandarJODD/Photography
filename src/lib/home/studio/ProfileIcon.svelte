@@ -1,5 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
+	import { emailStatus } from '$lib/state';
 	import { LogOut, Settings, User } from 'lucide-svelte';
 
 	let isProfileMenuOpen = false;
@@ -73,7 +74,14 @@
 		<!-- Active: "bg-gray-50", Not Active: "" -->
 		{#each profileTabs as item, i}
 			{#if item.name === 'logout'}
-				<form method="POST" use:enhance action="/?/logout">
+				<form
+					method="POST"
+					use:enhance
+					action="/?/logout"
+					on:submit|preventDefault={() => {
+						emailStatus.set('');
+					}}
+				>
 					<button
 						type="submit"
 						class="w-full outline-none flex gap-1.5 items-center px-3 py-1.5 text-sm leading-6 text-gray-900 hover:bg-gray-50 hover:text-blue-500 transition-all duration-100"

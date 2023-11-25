@@ -6,6 +6,7 @@
 	import { CameraIcon, Home, ImageIcon, LogIn, User2 } from 'lucide-svelte';
 	import ProfileIcon from '../studio/ProfileIcon.svelte';
 	import ToggleMode from '$lib/home/comps/ToggleMode.svelte';
+	import { emailStatus } from '$lib/state';
 
 	let allData = {
 		title: 'Camero',
