@@ -14,6 +14,9 @@ export const actions: Actions = {
             console.log(form);
             let name = form.get('name');
             let desc = form.get('desc');
+            let insta = form.get('insta');
+            let tweet = form.get('twitter');
+            let linked = form.get('linked')
             let image = form.get('inputImage');
             let randomString = crypto.randomUUID().slice(0, 8) + ".jpg";
             console.log(username, 'USERNAME');
@@ -42,7 +45,10 @@ export const actions: Actions = {
                     await db.update(profile).set({
                         firstName: String(name),
                         userImage: String(imgURL),
-                        desc: String(desc)
+                        desc: String(desc),
+                        socialInsta: String(insta),
+                        socialLinked: String(linked),
+                        socialTweet: String(tweet)
                     }).where(eq(profile.username, String(username)));
                 }
             }

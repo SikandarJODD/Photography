@@ -62,11 +62,13 @@
 		<div class="flex flex-1 items-center justify-end gap-x-2">
 			{#if email.length === 0}
 				<!-- content here -->
+				<ToggleMode />
 				<Button variant="outline" class="border-primary/50 hidden md:flex" href="/login"
 					>Log In</Button
 				>
 				<Button href="/signup">Sign Up</Button>
 			{:else}
+				<ToggleMode />
 				<ProfileIcon />
 			{/if}
 		</div>

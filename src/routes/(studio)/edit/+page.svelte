@@ -5,7 +5,7 @@
 	import Label from '$lib/components/ui/label/label.svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
 	import userIcon from '$lib/images/icons/userIcon.jpg';
-	import { Save, Upload } from 'lucide-svelte';
+	import { Instagram, Save, Upload } from 'lucide-svelte';
 	let avatar, fileinput;
 	const onFileSelected = (e) => {
 		let image = e.target.files[0];
@@ -28,19 +28,31 @@
 			</p>
 
 			<div class="mt-4 md:mt-8 flex flex-col gap-4">
-				<div class="grid gap-4 grid-cols-1 md:grid-cols-4">
+				<div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
 					<div>
-						<Label>Name</Label>
-						<div class="mt-2">
+						<Label for="name">Name</Label>
+						<div class="mt-1.5">
 							<Input placeholder="Your Name" name="name" id="name" />
 						</div>
 					</div>
-					<!-- <div>
-						<Label>Username</Label>
-						<div class="mt-2">
-							<Input placeholder="@aditya" name="username" id="username" />
+					<div>
+						<Label for="insta">Instagram</Label>
+						<div class="mt-1.5">
+							<Input placeholder="instagram.com/aditya" name="insta" id="insta" />
 						</div>
-					</div> -->
+					</div>
+					<div>
+						<Label for="twitter">Twitter</Label>
+						<div class="mt-1.5">
+							<Input placeholder="x.com/aditya" name="twitter" id="twitter" />
+						</div>
+					</div>
+					<div>
+						<Label for="linked">Linked In</Label>
+						<div class="mt-1.5">
+							<Input placeholder="linkedin.com/aditya" name="linked" id="linked" />
+						</div>
+					</div>
 				</div>
 				<div class="col-span-full">
 					<label for="about" class="block text-sm font-medium leading-6 text-primary">About</label>
@@ -50,7 +62,7 @@
 							class="max-w-lg"
 							name="desc"
 							id="desc"
-							rows="7"
+							rows="5"
 						/>
 					</div>
 				</div>

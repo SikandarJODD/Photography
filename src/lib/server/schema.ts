@@ -50,5 +50,9 @@ export let profile = pgTable("profile", {
     desc: text("description"),
     userImage: text("user_image"),
     followers: numeric("followers").default('0'),
-    totalImages: numeric("total_images").default('0')
+    totalImages: numeric("total_images").default('0'),
+    socialInsta: text("insta"),
+    socialLinked: text("linked"),
+    socialTweet: text("tweet"),
+    socialProfileLink: text('profile_link')
 })

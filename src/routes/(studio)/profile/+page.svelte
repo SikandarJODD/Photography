@@ -1,7 +1,18 @@
 <script lang="ts">
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { Instagram, Linkedin, Github, Image, PenSquare } from 'lucide-svelte';
+	import {
+		Instagram,
+		Linkedin,
+		Github,
+		Image,
+		PenSquare,
+		Twitter,
+		Copy,
+		CopyCheck,
+		CopyIcon,
+		CopyPlus
+	} from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
 	let socials = [
@@ -11,7 +22,7 @@
 		},
 		{
 			link: '',
-			icon: Github
+			icon: Twitter
 		},
 		{
 			link: '',
@@ -19,7 +30,7 @@
 		},
 		{
 			link: '',
-			icon: Image
+			icon: CopyCheck
 		}
 	];
 

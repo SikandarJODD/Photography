@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import * as AlertDialog from '$lib/components/ui/alert-dialog';
 	import { Button } from '$lib/components/ui/button';
-	import { LogIn, UserCog } from 'lucide-svelte';
+	import { Home, LogIn, UserCog } from 'lucide-svelte';
 	export let isOpen = false;
 </script>
 
@@ -16,6 +16,14 @@
 			<AlertDialog.Description>You Need to Login to View Your Profile..</AlertDialog.Description>
 		</AlertDialog.Header>
 		<AlertDialog.Footer>
+			<AlertDialog.Cancel
+				on:click={() => {
+					goto('/');
+				}}
+			>
+				<Home size="18" class="mr-1.5" strokeWidth="1.5" />
+				Home</AlertDialog.Cancel
+			>
 			<AlertDialog.Action
 				on:click={() => {
 					goto('/login');

@@ -13,12 +13,14 @@ export const load: PageServerLoad = async ({ locals }) => {
 };
 
 export const actions: Actions = {
-    default: async ({ request, locals }) => {
+    default: async ({ request, locals, url }) => {
         const formData = await request.formData();
         const email = formData.get("email");
         const password = formData.get("password");
         const username = formData.get("username");
-        console.log(username, ' ', email, ' ', password, 'Create Account');
+        // console.log(username, ' ', email, ' ', password, 'Create Account');
+        let profileLink = url.origin + "/profiles/" + username;
+        console.log('profile Link', profileLink);
 
         // basic check
         if (
@@ -54,7 +56,8 @@ export const actions: Actions = {
             });
             await db.insert(profile).values(
                 {
-                    username: String(username)
+                    username: String(username),
+                    socialProfileLink: String(profileLink),
                 }
             )
             const session = await auth.createSession({
