@@ -47,7 +47,7 @@
 			<a href="/" class="-m-1.5 p-1.5 flex items-center gap-2">
 				<span class="sr-only">Your Company</span>
 				<img class="h-8 w-auto" src={allData.img} alt={allData.title} />
-				<h1 class="font-semibold text-lg">{allData.title}</h1>
+				<h1 class="font-bold text-xl">{allData.title}</h1>
 			</a>
 		</div>
 		<div class="hidden lg:flex lg:gap-x-12">
@@ -94,7 +94,7 @@
 				<a href="/" class="-m-1.5 p-1.5 flex items-center gap-2">
 					<span class="sr-only">Your Company</span>
 					<img class="h-8 w-auto" src={allData.img} alt="Logo Title" />
-					<h1 class="font-semibold text-lg text-primary">{allData.title}</h1>
+					<h1 class="font-bold text-xl text-primary">{allData.title}</h1>
 				</a>
 				{#if email.length === 0}
 					<Button href="/signup" class="ml-auto">Sign Up</Button>

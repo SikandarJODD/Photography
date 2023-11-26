@@ -1,5 +1,6 @@
 <script>
 	import { enhance } from '$app/forms';
+	import { page } from '$app/stores';
 	import { LogOut, Settings, User } from 'lucide-svelte';
 	import { scale } from 'svelte/transition';
 
@@ -12,10 +13,16 @@
 		profileLink: '#',
 		topic: 'Dashboard'
 	};
+	let webprofle = {
+		profileName: $page.data.userProfile.firstName || '',
+		profileImg:
+			$page.data.userProfile.userImage ||
+			'https://i.pinimg.com/564x/88/db/6f/88db6fd38202de80d7c7c3964783cb04.jpg'
+	};
 	let profileTabs = [
 		{
 			name: 'Your Profile',
-			link: '#',
+			link: '/profile',
 			icon: User
 		},
 		{
@@ -41,10 +48,14 @@
 		on:click={() => (isProfileMenuOpen = !isProfileMenuOpen)}
 	>
 		<span class="sr-only">Open user menu</span>
-		<img class="h-8 w-8 rounded-full bg-gray-50" src={webdata.profileImg} alt="" />
+		<img
+			class="h-9 w-9 rounded-full bg-gray-50 object-cover object-center md:border-blue-500/80 md:border-2"
+			src={webprofle.profileImg}
+			alt="user profile"
+		/>
 		<span class="hidden lg:flex lg:items-center">
-			<span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true"
-				>{webdata.profileName}</span
+			<span class="ml-4 text-sm font-semibold leading-6 text-primary" aria-hidden="true"
+				>{webprofle.profileName}</span
 			>
 			<svg
 				class="{isProfileMenuOpen
@@ -71,7 +82,7 @@
 			aria-orientation="vertical"
 			aria-labelledby="user-menu-button"
 			tabindex="-1"
-			in:scale={{ duration: 300 }}
+			transition:scale={{ duration: 300 }}
 		>
 			{#each profileTabs as item, i}
 				{#if item.name === 'logout'}
@@ -89,6 +100,7 @@
 					</form>
 				{:else}
 					<a
+						on:click={() => (isProfileMenuOpen = false)}
 						href={item.link}
 						class="flex gap-1.5 items-center px-3 py-1.5 text-sm leading-6 text-gray-900 hover:bg-gray-50 hover:text-blue-500 transition-all duration-100"
 						role="menuitem"

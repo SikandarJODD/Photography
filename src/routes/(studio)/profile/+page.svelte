@@ -15,28 +15,29 @@
 	} from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
+	let profile = $page.data.userProfile;
 	let socials = [
 		{
-			link: '',
+			link: $page.data.userProfile.socialInsta || '',
 			icon: Instagram
 		},
 		{
-			link: '',
+			link: $page.data.userProfile.socialTweet || '',
 			icon: Twitter
 		},
 		{
-			link: '',
+			link: $page.data.userProfile.socialLinked || '',
 			icon: Linkedin
 		},
 		{
-			link: '',
+			link: $page.data.userProfile.socialProfileLink || '',
 			icon: CopyCheck
 		}
 	];
+	$: console.log(socials);
 
 	let screenwidth = 0;
-	$: btnsize = screenwidth < 500 ? 'icon' : 'default';
-	let profile = $page.data.userProfile;
+	$: btnsize = screenwidth < 500 ? 'sm' : 'default';
 	let email = $page.data.email || '';
 	$: isOpen = email.length === 0 ? true : false;
 </script>
@@ -49,14 +50,14 @@
 				src={profile.userImage ||
 					'https://i.pinimg.com/564x/26/82/78/2682787e9d8241a3164a67748ac505b6.jpg'}
 				alt="profile_image"
-				class="h-16 md:h-36 rounded-full p-0.5 border-blue-600 border-2"
+				class="h-16 w-16 md:h-32 md:w-32 xl:w-40 xl:h-40 object-cover origin-center rounded-full p-0.5 border-blue-600 border-2"
 			/>
 		</div>
 		<div class="col-span-6 lg:col-span-4">
 			<div class="flex items-center justify-between mb-2">
 				<h2 class="text-md font-semibold">@{profile.username}</h2>
 				<div>
-					<Button href="/edit" size={btnsize}>
+					<Button href="/edit" size={btnsize} class="px-1.5">
 						<PenSquare size="18" strokeWidth="1.3" class="sm:mr-1.5" />
 						{screenwidth > 500 ? 'Edit' : ''}
 					</Button>
@@ -76,7 +77,7 @@
 			</div>
 			<div class="mt-4 -ml-8 sm:ml-0 flex items-center gap-x-4">
 				{#each socials as item}
-					<Button size="icon" class="md:h-10 md:w-10">
+					<Button size="icon" class="md:h-10 md:w-10" href={item.link} target="_blank">
 						<svelte:component this={item.icon} strokeWidth="1.5" />
 					</Button>
 				{/each}
