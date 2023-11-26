@@ -3,6 +3,7 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Instagram, Linkedin, Github, Image, PenSquare } from 'lucide-svelte';
 	import { page } from '$app/stores';
+	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
 	let socials = [
 		{
 			link: '',
@@ -25,6 +26,8 @@
 	let screenwidth = 0;
 	$: btnsize = screenwidth < 500 ? 'icon' : 'default';
 	let profile = $page.data.userProfile;
+	let email = $page.data.email || '';
+	$: isOpen = email.length === 0 ? true : false;
 </script>
 
 <svelte:window bind:innerWidth={screenwidth} />
@@ -71,3 +74,4 @@
 	</div>
 	<Separator />
 </div>
+<IsLoginAleart {isOpen} />
