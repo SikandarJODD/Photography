@@ -17,6 +17,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import HomeIcon from '$lib/images/icons/home.png';
 	import { emailStatus } from '$lib/state';
+	import ToggleMode from '../comps/ToggleMode.svelte';
 
 	let isMobileMenu = false;
 	let layoutNavs = [
@@ -341,12 +342,12 @@
 			<div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
 			<div class=" flex justify-end w-full gap-x-4 self-stretch lg:gap-x-6">
-				<div class="flex items-center gap-x-4 lg:gap-x-6">
-					<button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-800">
+				<div class="flex items-center gap-x-4 lg:gap-x-3">
+					<!-- <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-800">
 						<span class="sr-only">View notifications</span>
 						<BellDot strokeWidth="1.5" />
-					</button>
-
+					</button> -->
+					<ToggleMode />
 					<!-- Separator -->
 					<div class="hidden lg:block lg:h-6 lg:w-px lg:bg-gray-900/10" aria-hidden="true" />
 

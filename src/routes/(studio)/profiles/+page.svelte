@@ -4,6 +4,7 @@
 	export let data;
 	let pdatas = data.allprofiles.map((k) => {
 		return {
+			id: k.id,
 			name: k.firstName,
 			img: k.userImage,
 			desc: k.desc,
@@ -15,7 +16,7 @@
 			name: 'Sikandar Bhide',
 			img: 'https://i.pinimg.com/564x/50/29/b7/5029b778d7b738518ba1b9ec0467d3c4.jpg',
 			desc: 'Sveltekit Developer',
-			username: `/profiles/coding`
+			username: `/profiles/SikandarBhide`
 		},
 		{
 			name: 'Saloni Maheshwari',
@@ -52,7 +53,7 @@
 
 <!-- {JSON.stringify(data.allprofiles)} -->
 <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5 place-items-center">
-	{#each ptrial as pdata}
+	{#each pdatas as pdata, i}
 		<ProfileCard {pdata} />
 	{/each}
 </div>
