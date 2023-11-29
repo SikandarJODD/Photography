@@ -56,3 +56,9 @@ export let profile = pgTable("profile", {
     socialTweet: text("tweet"),
     socialProfileLink: text('profile_link')
 })
+export let allposts = pgTable("posts", {
+    id: serial("id").primaryKey().notNull(),
+    img: text("imgurl"),
+    caption: text("caption"),
+    username: text("username")
+})

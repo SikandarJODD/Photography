@@ -33,7 +33,7 @@
 		},
 		{
 			name: 'Photos',
-			link: '',
+			link: '/photos',
 			icon: Image
 		},
 		{
@@ -48,27 +48,27 @@
 		},
 		{
 			name: 'create',
-			link: '',
+			link: '/create',
 			icon: ImagePlus
 		}
 	];
-	let teams = [
-		{
-			name: 'Frontend Team',
-			link: '#',
-			icon: 'F'
-		},
-		{
-			name: 'UI Designers',
-			link: '#',
-			icon: 'U'
-		},
-		{
-			name: 'System Designers',
-			link: '#',
-			icon: 'S'
-		}
-	];
+	// let teams = [
+	// 	{
+	// 		name: 'Frontend Team',
+	// 		link: '#',
+	// 		icon: 'F'
+	// 	},
+	// 	{
+	// 		name: 'UI Designers',
+	// 		link: '#',
+	// 		icon: 'U'
+	// 	},
+	// 	{
+	// 		name: 'System Designers',
+	// 		link: '#',
+	// 		icon: 'S'
+	// 	}
+	// ];
 	let webdata = {
 		img: HomeIcon,
 		profileName: 'Saloni Maheshwari',
@@ -153,12 +153,11 @@
 									{/each}
 								</ul>
 							</li>
-							<li>
+							<!-- <li>
 								<div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
 								<ul role="list" class="-mx-2 mt-2 space-y-1">
 									{#each teams as item}
 										<li>
-											<!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
 											<a
 												href={item.link}
 												class="{routeID === item.link
@@ -174,7 +173,7 @@
 										</li>
 									{/each}
 								</ul>
-							</li>
+							</li> -->
 							<li class="mt-auto">
 								<a
 									href="/"
@@ -256,12 +255,11 @@
 							{/each}
 						</ul>
 					</li>
-					<li>
+					<!-- <li>
 						<div class="text-xs font-semibold leading-6 text-gray-400">Your teams</div>
 						<ul role="list" class="-mx-2 mt-2 space-y-1">
 							{#each teams as item}
 								<li>
-									<!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
 									<a
 										href={item.link}
 										class="{routeID === item.link
@@ -277,7 +275,7 @@
 								</li>
 							{/each}
 						</ul>
-					</li>
+					</li> -->
 					<li class="mt-auto">
 						<a
 							href="/"
@@ -364,7 +362,7 @@
 			</div>
 		</div>
 
-		<main class="py-10 bg-gray-50 dark:bg-gray-950">
+		<main class="py-10 bg-white dark:bg-slate-950">
 			<div class="px-4 sm:px-6 lg:px-8">
 				<slot />
 			</div>
