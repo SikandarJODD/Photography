@@ -24,7 +24,7 @@
 			},
 			{
 				name: 'Collection',
-				link: '/',
+				link: '/photos',
 				icon: ImageIcon
 			},
 			{

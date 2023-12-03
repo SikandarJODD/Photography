@@ -130,7 +130,7 @@
 				>
 					<div class="flex h-16 shrink-0 items-center gap-2 border-b border-gray-400">
 						<img class="h-8 w-auto" src={webdata.img} alt="Your Company" />
-						<h1 class="text-white font-bold text-xl">{webdata.webname}</h1>
+						<a href="/" class="text-white font-bold text-xl">{webdata.webname}</a>
 					</div>
 					<nav class="flex flex-1 flex-col">
 						<ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -209,12 +209,14 @@
 	</div>
 
 	<!-- Static sidebar for desktop -->
-	<div class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-60 lg:flex-col">
+	<div
+		class="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-52 xl:w-60 lg:flex-col border-r border-primary/30"
+	>
 		<!-- Sidebar component, swap this element with another sidebar if you like -->
-		<div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-900 px-6 pb-4">
+		<div class="flex grow flex-col gap-y-5 overflow-y-auto bg-gray-50 dark:bg-gray-900 px-6 pb-4">
 			<div class="flex h-16 shrink-0 items-center gap-2">
 				<img class="h-8 w-auto" src={webdata.img} alt="Your Company" />
-				<h1 class="text-white font-bold text-xl">{webdata.webname}</h1>
+				<a href="/" class="text-primary font-bold text-xl">{webdata.webname}</a>
 			</div>
 			<nav class="flex flex-1 flex-col">
 				<ul role="list" class="flex flex-1 flex-col gap-y-7">
@@ -245,7 +247,7 @@
 										href={item.link}
 										class="{routeID === item.link
 											? 'bg-gray-800 text-white transition-all duration-150'
-											: 'text-gray-400 hover:text-white hover:bg-sky-800/30 transition-all duration-150'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold capitalize"
+											: 'dark:text-gray-400 dark:hover:text-white hover:bg-gray-300/50 dark:hover:bg-sky-800/30 transition-all duration-150'} group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold capitalize"
 									>
 										<svelte:component this={item.icon} strokeWidth="1.34" size="22" />
 										{item.name}
@@ -279,7 +281,7 @@
 					<li class="mt-auto">
 						<a
 							href="/"
-							class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white"
+							class="group -mx-2 flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 dark:text-gray-400 hover:bg-gray-300/50 dark:hover:bg-sky-800/30 dark:hover:text-white"
 						>
 							<svg
 								class="group-hover:rotate-45 transition-all duration-150 h-6 w-6 shrink-0"
@@ -308,7 +310,7 @@
 		</div>
 	</div>
 
-	<div class="lg:pl-60">
+	<div class="lg:pl-52 xl:pl-60">
 		<div
 			class="{routeID[2] === 'profile' || routeID[2] === 'edit'
 				? 'md:hidden'
@@ -363,7 +365,7 @@
 		</div>
 
 		<main class="py-10 bg-white dark:bg-slate-950">
-			<div class="px-4 sm:px-6 lg:px-8">
+			<div class="px-4 sm:px-6 lg:px-4 xl:px-8">
 				<slot />
 			</div>
 		</main>

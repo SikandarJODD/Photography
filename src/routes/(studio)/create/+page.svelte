@@ -6,6 +6,8 @@
 	import { enhance } from '$app/forms';
 	import { Globe } from 'lucide-svelte';
 	import Separator from '$lib/components/ui/separator/separator.svelte';
+	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
+	import { page } from '$app/stores';
 	let avatar, fileinput;
 
 	const onFileSelected = (e) => {
@@ -16,6 +18,9 @@
 			avatar = e.target.result;
 		};
 	};
+
+	let email = $page.data.email || '';
+	$: isOpen = email.length === 0 ? true : false;
 </script>
 
 <form method="POST" use:enhance>
@@ -71,3 +76,4 @@
 		>
 	</div>
 </form>
+<IsLoginAleart {isOpen} />

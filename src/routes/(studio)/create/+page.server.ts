@@ -1,7 +1,7 @@
 import { PUBLIC_BUCKET_NAME } from "$env/static/public";
 import supabase from "$lib";
 import { db } from "$lib/server";
-import { allposts } from "$lib/server/schema";
+import { posts } from "$lib/server/schema";
 import { redirect } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 
@@ -15,6 +15,8 @@ export const actions: Actions = {
             let image = form.get('uploadedImage');
             let randomString = crypto.randomUUID().slice(0, 10) + ".jpg";
             let imgURL = '';
+            console.log(username, caption, image, randomString);
+
             try {
                 const { data, error } = await supabase
                     .storage
@@ -32,13 +34,15 @@ export const actions: Actions = {
                     imgURL = data.publicUrl;
                 }
                 finally {
-                    await db.insert(allposts).values({
+                    console.log('working ?');
+
+                    await db.insert(posts).values({
                         img: String(imgURL),
                         caption: String(caption),
-                        username: username,
+                        username: String(username),
                     })
-                    throw redirect(302, '/photos');
                 }
+                throw redirect(302, '/photos');
             }
         }
     }
