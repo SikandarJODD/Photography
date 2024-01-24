@@ -4,7 +4,11 @@
 	import { Instagram, Linkedin, PenSquare, Twitter, CopyCheck } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
+	import PicGrid from '$lib/home/photos/PicGrid.svelte';
 	let profile = $page.data.userProfile;
+	export let data;
+	let allimages = data.allposts;
+
 	let socials = [
 		{
 			link: $page.data.userProfile.socialInsta || '',
@@ -23,7 +27,6 @@
 			icon: CopyCheck
 		}
 	];
-	$: console.log(socials);
 
 	let screenwidth = 0;
 	$: btnsize = screenwidth < 500 ? 'sm' : 'default';
@@ -46,7 +49,7 @@
 			<div class="flex items-center justify-between mb-2">
 				<h2 class="text-md font-semibold">@{profile.username}</h2>
 				<div>
-					<Button href="/edit" size={btnsize} class="px-1.5">
+					<Button href="/edit" size={btnsize} class="px-1.5 md:px-3">
 						<PenSquare size="18" strokeWidth="1.3" class="sm:mr-1.5" />
 						{screenwidth > 500 ? 'Edit' : ''}
 					</Button>
@@ -56,10 +59,7 @@
 				<h1 class="font-semibold text-xl">{profile.firstName}</h1>
 				<p>{profile.desc || ''}</p>
 			</div>
-			<div class="mt-2 -ml-8 sm:ml-0 flex items-center gap-x-3">
-				<Button size="sm" variant="outline"
-					><span class="mr-2">{profile.followers}</span>Followers</Button
-				>
+			<div class="mt-2 -ml-[34%] sm:ml-0 flex items-center">
 				<Button size="sm" variant="outline"
 					><span class="mr-2">{profile.totalImages}</span>Posts</Button
 				>
@@ -74,5 +74,8 @@
 		</div>
 	</div>
 	<Separator />
+	<div class="mt-2 md:mt-6">
+		<PicGrid {allimages} />
+	</div>
 </div>
 <IsLoginAleart {isOpen} />

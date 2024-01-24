@@ -30,7 +30,7 @@
 		>
 			<img
 				src={pdata.img}
-				alt="userImage={pdata.username}"
+				alt="userImage-{pdata.username}"
 				style:--imgtag="img-{pdata.id}"
 				class=" md:group-hover:scale-110 transition-all duration-100 ease-in h-36 w-36 md:h-40 md:w-40 xl:h-48 xl:w-48 rounded-full object-cover object-center"
 			/>

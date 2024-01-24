@@ -5,29 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1700857248417,
-      "tag": "0000_parallel_magik",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1700941188512,
-      "tag": "0001_puzzling_james_howlett",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1700973718670,
-      "tag": "0002_fixed_the_renegades",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1701255573807,
-      "tag": "0003_lyrical_venus",
+      "when": 1706130193282,
+      "tag": "0000_right_morg",
       "breakpoints": true
     }
   ]

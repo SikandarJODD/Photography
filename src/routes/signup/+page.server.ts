@@ -5,6 +5,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { PageServerLoad, Actions } from "./$types";
 import { profile } from "$lib/server/schema";
 import { db } from "$lib/server";
+import supabase from "$lib";
 
 export const load: PageServerLoad = async ({ locals }) => {
     const session = await locals.auth.validate();
@@ -14,10 +15,11 @@ export const load: PageServerLoad = async ({ locals }) => {
 
 export const actions: Actions = {
     default: async ({ request, locals, url }) => {
-        const formData = await request.formData();
-        const email = formData.get("email");
-        const password = formData.get("password");
-        const username = formData.get("username");
+        let formData = await request.formData();
+        let email = formData.get("email");
+        let password = formData.get("password");
+        let username = String(formData.get("username"));
+        username = username.replace(' ', '_');
         // console.log(username, ' ', email, ' ', password, 'Create Account');
         let profileLink = url.origin + "/profiles/" + username;
         console.log('profile Link', profileLink);
@@ -64,6 +66,10 @@ export const actions: Actions = {
                 userId: user.userId,
                 attributes: {}
             });
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+            })
             locals.auth.setSession(session); // set session cookie
         } catch (e) {
             console.log(e);
@@ -71,8 +77,6 @@ export const actions: Actions = {
                 message: "An unknown error occurred"
             });
         }
-        // redirect to
-        // make sure you don't throw inside a try/catch block!
-        throw redirect(302, "/profiles");
+        throw redirect(302, "/edit");
     }
 };

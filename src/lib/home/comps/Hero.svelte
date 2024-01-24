@@ -12,9 +12,9 @@
 						class="w-full flex flex-col items-center lg:items-start max-w-xl md:max-w-full lg:max-w-xl lg:shrink-0 xl:max-w-3xl lg:mb-56"
 					>
 						<h1
-							class="mainTitle w-full md:w-fit text-center md:text-left text-4xl sm:text-4xl lg:text-4xl xl:text-6xl font-bold tracking-tight text-gray-900 dark:text-gray-50 capitalize"
+							class="mainTitle w-full md:w-fit text-center md:text-left text-4xl sm:text-4xl lg:text-4xl xl:text-6xl font-bold tracking-tight text-primary capitalize"
 						>
-							When I photograph I make love.
+							Capture the Best Moments with <span class="text-indigo-700">Photix</span>
 						</h1>
 						<p
 							class="text-center lg:text-start relative mt-6 lg:my-8 text-lg leading-8 text-gray-500/80 sm:max-w-md lg:max-w-none lg:text-xl subtitle"

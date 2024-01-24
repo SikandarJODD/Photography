@@ -35,18 +35,6 @@
 			img: 'https://i.pinimg.com/736x/43/eb/8f/43eb8f2261a090e6ed5414a1c76b0722.jpg',
 			desc: 'Creative Marketer',
 			username: `/profiles/coding`
-		},
-		{
-			name: 'Rahul Wagh',
-			img: 'https://i.pinimg.com/564x/43/86/84/438684f36c8838ea0e1d752f96ab0a92.jpg',
-			desc: 'Trading Analysis',
-			username: `/profiles/coding`
-		},
-		{
-			name: 'Rutika Bhuimbar',
-			img: 'https://i.pinimg.com/564x/cf/84/26/cf8426c53a714ea11d787688778cbc3f.jpg',
-			desc: 'DSA Developer',
-			username: `/profiles/coding`
 		}
 	];
 </script>

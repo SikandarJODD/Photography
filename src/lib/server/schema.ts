@@ -49,7 +49,6 @@ export let profile = pgTable("profile", {
     firstName: text("firstName"),
     desc: text("description"),
     userImage: text("user_image"),
-    followers: numeric("followers").default('0'),
     totalImages: numeric("total_images").default('0'),
     socialInsta: text("insta"),
     socialLinked: text("linked"),
@@ -60,5 +59,5 @@ export let posts = pgTable("posts", {
     id: serial("id").primaryKey().notNull(),
     img: text("imgurl"),
     caption: text("caption"),
-    username: text("username")
+    username: text("username").references(() => user.username),
 })

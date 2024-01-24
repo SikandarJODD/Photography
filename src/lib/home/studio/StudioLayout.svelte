@@ -364,7 +364,7 @@
 			</div>
 		</div>
 
-		<main class="py-10 bg-white dark:bg-slate-950">
+		<main class="py-4 md:py-10 bg-white dark:bg-slate-950">
 			<div class="px-4 sm:px-6 lg:px-4 xl:px-8">
 				<slot />
 			</div>
