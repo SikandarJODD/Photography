@@ -22,7 +22,7 @@ export const actions: Actions = {
         username = username.replace(' ', '_');
         // console.log(username, ' ', email, ' ', password, 'Create Account');
         let profileLink = url.origin + "/profiles/" + username;
-        console.log('profile Link', profileLink);
+        // console.log('profile Link', profileLink);
 
         // basic check
         if (

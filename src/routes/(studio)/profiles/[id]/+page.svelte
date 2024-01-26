@@ -3,12 +3,14 @@
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Instagram, Linkedin, Twitter, CopyCheck, Mail } from 'lucide-svelte';
 	import { page } from '$app/stores';
+	import PicGrid from '$lib/home/photos/PicGrid.svelte';
 	// Show Profile Code
 	export let data;
 	let getProfileName = $page.params.id;
 	let filterProfile = data.allprofiles.filter((k) => {
 		return k.username === String(getProfileName);
 	})[0];
+	let allimages = data.userPosts;
 
 	let profile = filterProfile;
 	let socials = [
@@ -23,11 +25,11 @@
 		{
 			link: filterProfile.socialLinked || '',
 			icon: Linkedin
-		},
-		{
-			link: filterProfile.socialProfileLink || '',
-			icon: CopyCheck
 		}
+		// {
+		// 	link: filterProfile.socialProfileLink || '',
+		// 	icon: CopyCheck
+		// }
 	];
 
 	let screenwidth = 0;
@@ -62,24 +64,35 @@
 				</h1>
 				<p>{profile.desc || ''}</p>
 			</div>
-			<div class="mt-2 -ml-8 sm:ml-0 flex items-center gap-x-3">
-				<Button size="sm" variant="outline"
+			<div class="mt-2 ml-10 sm:ml-0 flex items-center">
+				<!-- <Button size="sm" variant="outline"
 					><span class="mr-2">{profile.followers || 0}</span>Followers</Button
-				>
+				> -->
 				<Button size="sm" variant="outline"
 					><span class="mr-2">{profile.totalImages || 0}</span>Posts</Button
 				>
 			</div>
-			<div class="mt-4 -ml-8 sm:ml-0 flex items-center gap-x-4">
+			<div class="mt-4 sm:ml-0 flex items-center gap-x-4">
 				{#each socials as item}
-					<Button size="icon" class="md:h-10 md:w-10" href={item.link} target="_blank">
-						<svelte:component this={item.icon} strokeWidth="1.5" />
+					<Button
+						size="icon"
+						variant="outline"
+						class="md:h-10 md:w-10 border-primary/60"
+						href={item.link}
+						target="_blank"
+					>
+						<svelte:component this={item.icon} strokeWidth="1.4" />
 					</Button>
 				{/each}
 			</div>
 		</div>
 	</div>
 	<Separator />
+</div>
+<div>
+	<div class="mt-2 md:mt-6">
+		<PicGrid {allimages} />
+	</div>
 </div>
 
 <style>

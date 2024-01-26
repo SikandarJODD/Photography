@@ -61,3 +61,8 @@ export let posts = pgTable("posts", {
     caption: text("caption"),
     username: text("username").references(() => user.username),
 })
+export let brocode = pgTable("brocode", {
+    id: serial("id").primaryKey().notNull(),
+    brocode: text("brocode"),
+    age: numeric("age"),
+})

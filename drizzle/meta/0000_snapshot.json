@@ -1,9 +1,37 @@
 {
-  "id": "6248bb07-8b8a-4845-8702-ebe1f2b3b4bb",
+  "id": "7d5edfd2-dba7-441c-b887-db3f58ef932c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "5",
   "dialect": "pg",
   "tables": {
+    "brocode": {
+      "name": "brocode",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "serial",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "brocode": {
+          "name": "brocode",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "age": {
+          "name": "age",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
     "user_key": {
       "name": "user_key",
       "schema": "",

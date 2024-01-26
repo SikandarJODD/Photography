@@ -12,13 +12,14 @@
 		"format": "prettier --write .",
 		"generate": "drizzle-kit generate:pg",
 		"push": "drizzle-kit push:pg",
-		"pull": "drizzle-kit introspect:pg"
+		"pull": "drizzle-kit introspect:pg",
+		"studio": "drizzle-kit studio"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.27.4",
 		"autoprefixer": "^10.4.14",
-		"drizzle-kit": "^0.20.4",
+		"drizzle-kit": "^0.20.13",
 		"postcss": "^8.4.24",
 		"postcss-load-config": "^4.0.1",
 		"prettier": "^3.0.0",

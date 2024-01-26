@@ -9,7 +9,7 @@
 	import { emailStatus } from '$lib/state';
 
 	let allData = {
-		title: 'Camero',
+		title: 'Photix',
 		img: HomeIcon,
 		navs: [
 			{

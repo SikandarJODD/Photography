@@ -314,7 +314,7 @@
 		<div
 			class="{routeID[2] === 'profile' || routeID[2] === 'edit'
 				? 'md:hidden'
-				: ''} sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white dark:bg-gray-950 px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8"
+				: ''} sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white dark:bg-gray-950/20 dark:backdrop-blur-sm px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0"
 		>
 			<button
 				type="button"
@@ -342,7 +342,9 @@
 			<div class="h-6 w-px bg-gray-900/10 lg:hidden" aria-hidden="true" />
 
 			<div class=" flex justify-end w-full gap-x-4 self-stretch lg:gap-x-6">
-				<div class="flex items-center gap-x-4 lg:gap-x-3">
+				<div
+					class="flex items-center px-4 gap-x-4 lg:gap-x-3 dark:bg-gradient-to-r from-transparent to-gray-900/90"
+				>
 					<!-- <button type="button" class="-m-2.5 p-2.5 text-gray-400 hover:text-gray-800">
 						<span class="sr-only">View notifications</span>
 						<BellDot strokeWidth="1.5" />

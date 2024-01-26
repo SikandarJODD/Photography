@@ -7,10 +7,10 @@ export const load = async ({ locals }) => {
     let allprofiles = await db.select().from(profile);
     if (session) {
         let userPosts = await db.select().from(posts).where(eq(posts.username, session.user.username));
-        console.log(userPosts, 'User Posts');
+        // console.log(userPosts, 'User Posts');
 
         let userName = session.user.username;
-        console.log(userName, 'User name');
+        // console.log(userName, 'User name');
         let userProfile = await db.select().from(profile).where(eq(profile.username, userName));
         return {
             email: session.user.email,

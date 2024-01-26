@@ -23,10 +23,12 @@
 							of the viewer.
 						</p>
 						<div class="mt-5 flex items-center justify-center md:justify-start gap-x-2 md:gap-x-6">
-							<Button size="lg"
-								><Users size="20" strokeWidth="1.3" class="mr-1.5" /> Profiles</Button
+							<Button size="lg" href="/profiles"
+								><Users size="20" strokeWidth="1.3" class="mr-2" /> Profiles</Button
 							>
-							<Button size="lg"><Image size="20" strokeWidth="1.3" class="mr-1.5" />Moments</Button>
+							<Button size="lg" href="/photos"
+								><Image size="20" strokeWidth="1.3" class="mr-1.5" />Moments</Button
+							>
 							<!-- <Button size="lg" variant="outline" class="border border-primary"
 								><img src={imgsIcon} class="h-6 w-6 mr-2" alt="imagesicon" /> Moments</Button
 							> -->

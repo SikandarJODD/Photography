@@ -1,3 +1,9 @@
+CREATE TABLE IF NOT EXISTS "brocode" (
+	"id" serial PRIMARY KEY NOT NULL,
+	"brocode" text,
+	"age" numeric
+);
+--> statement-breakpoint
 CREATE TABLE IF NOT EXISTS "user_key" (
 	"id" varchar(255) PRIMARY KEY NOT NULL,
 	"user_id" varchar(15) NOT NULL,
