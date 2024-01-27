@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import { CheckCircle, Plus } from 'lucide-svelte';
 	let btnText = 'Follow';

@@ -6,11 +6,16 @@
 	import PicGrid from '$lib/home/photos/PicGrid.svelte';
 	// Show Profile Code
 	export let data;
-	let getProfileName = $page.params.id;
-	let filterProfile = data.allprofiles.filter((k) => {
-		return k.username === String(getProfileName);
+	let profileName = $page.url.pathname.split('/')[2];
+	console.log(profileName, 'profile name');
+
+	let filterProfile = data.allprofiles.filter((item) => {
+		return item.username === profileName;
 	})[0];
+	console.log(filterProfile, 'filter profile');
+
 	let allimages = data.userPosts;
+	console.log(data);
 
 	let profile = filterProfile;
 	let socials = [
@@ -65,9 +70,6 @@
 				<p>{profile.desc || ''}</p>
 			</div>
 			<div class="mt-2 ml-10 sm:ml-0 flex items-center">
-				<!-- <Button size="sm" variant="outline"
-					><span class="mr-2">{profile.followers || 0}</span>Followers</Button
-				> -->
 				<Button size="sm" variant="outline"
 					><span class="mr-2">{profile.totalImages || 0}</span>Posts</Button
 				>

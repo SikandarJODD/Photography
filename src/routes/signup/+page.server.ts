@@ -16,33 +16,14 @@ export const load: PageServerLoad = async ({ locals }) => {
 export const actions: Actions = {
     default: async ({ request, locals, url }) => {
         let formData = await request.formData();
-        let email = formData.get("email");
-        let password = formData.get("password");
+        let email = formData.get("email")?.toString();
+        let password = formData.get("password")?.toString();
         let username = String(formData.get("username"));
-        username = username.replace(' ', '_');
-        // console.log(username, ' ', email, ' ', password, 'Create Account');
-        let profileLink = url.origin + "/profiles/" + username;
-        // console.log('profile Link', profileLink);
+        username = username.split(" ").join("");
+        // console.log(username, 'username');
 
-        // basic check
-        if (
-            typeof email !== "string" ||
-            email.length < 4 ||
-            email.length > 31
-        ) {
-            return fail(400, {
-                message: "Invalid Email"
-            });
-        }
-        if (
-            typeof password !== "string" ||
-            password.length < 6 ||
-            password.length > 255
-        ) {
-            return fail(400, {
-                message: "Invalid password"
-            });
-        }
+        let profileLink = url.origin + "/profiles/" + username;
+
         try {
             let user = await auth.createUser({
                 key: {
@@ -53,13 +34,13 @@ export const actions: Actions = {
                 },
                 attributes: {
                     email: String(email),
-                    username: String(username)
+                    username: username
                 },
             });
             await db.insert(profile).values(
                 {
-                    username: String(username),
-                    socialProfileLink: String(profileLink),
+                    username: username,
+                    socialProfileLink: profileLink,
                 }
             )
             const session = await auth.createSession({
