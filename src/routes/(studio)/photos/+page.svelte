@@ -1,6 +1,8 @@
 <script>
 	import { Download, Share2, User } from 'lucide-svelte';
-	let allimages = $page.data.allposts;
+	export let data;
+	let allimages = data.allposts.sort((a, b) => a.id - b.id);
+	console.log(allimages, 'allimages');
 	let allpics = [
 		{
 			img: 'https://i.pinimg.com/564x/b1/1e/7f/b11e7fb4f9c9b90718092952b79f6102.jpg',

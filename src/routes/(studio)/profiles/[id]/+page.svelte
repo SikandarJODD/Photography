@@ -90,7 +90,7 @@
 	<Separator />
 </div>
 <div>
-	<div class="mt-2 md:mt-6">
+	<div class="mt-4 md:mt-6">
 		<PicGrid {allimages} />
 	</div>
 </div>

@@ -7,7 +7,7 @@
 	import PicGrid from '$lib/home/photos/PicGrid.svelte';
 	let profile = $page.data.userProfile;
 	export let data;
-	let allimages = data.allposts;
+	let allimages = data.allposts.filter((item) => item.username === profile.username);
 
 	let socials = [
 		{
@@ -66,7 +66,12 @@
 			</div>
 			<div class="mt-4 -ml-8 sm:ml-0 flex items-center gap-x-4">
 				{#each socials as item}
-					<Button size="icon" class="md:h-10 md:w-10" href={item.link} target="_blank">
+					<Button
+						size="icon"
+						class="md:h-10 md:w-10"
+						href={item.link ? item.link : '/'}
+						target="_blank"
+					>
 						<svelte:component this={item.icon} strokeWidth="1.5" />
 					</Button>
 				{/each}
@@ -74,7 +79,7 @@
 		</div>
 	</div>
 	<Separator />
-	<div class="mt-2 md:mt-6">
+	<div class="mt-4 md:mt-6">
 		<PicGrid {allimages} />
 	</div>
 </div>

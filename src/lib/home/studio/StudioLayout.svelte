@@ -7,6 +7,7 @@
 		Image,
 		ImagePlus,
 		LogOut,
+		Menu,
 		Settings,
 		SparkleIcon,
 		User,
@@ -314,28 +315,15 @@
 		<div
 			class="{routeID[2] === 'profile' || routeID[2] === 'edit'
 				? 'md:hidden'
-				: ''} sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white dark:bg-gray-950/20 dark:backdrop-blur-sm px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-0"
+				: ''} sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white dark:bg-gray-950/20 dark:backdrop-blur-sm shadow-sm sm:gap-x-6"
 		>
 			<button
 				type="button"
-				class="-m-2.5 p-2.5 text-gray-700 lg:hidden"
+				class="ml-2 p-2.5 text-primary/80 lg:hidden"
 				on:click={() => (isMobileMenu = true)}
 			>
 				<span class="sr-only">Open sidebar</span>
-				<svg
-					class="h-6 w-6"
-					fill="none"
-					viewBox="0 0 24 24"
-					stroke-width="1.5"
-					stroke="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-					/>
-				</svg>
+				<Menu />
 			</button>
 
 			<!-- Separator -->
