@@ -1,9 +1,28 @@
 <script lang="ts">
+	import { Toaster } from '$lib/components/ui/sonner';
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+	import { superForm } from 'sveltekit-superforms/client';
+	import type { PageData } from './$types';
+	import { toast } from 'svelte-sonner';
+	import { goto } from '$app/navigation';
+	import { Loading } from '$lib/components/ui/command';
+
+	export let data: PageData;
+	let { form, errors, constraints } = superForm(data.form, {
+		resetForm: true,
+		onUpdated({ form }) {
+			if (form.valid) {
+				toast.success('Sign Up successful! Check Your Email');
+				setTimeout(() => {
+					goto('/edit');
+				}, 800);
+			}
+		}
+	});
 </script>
 
 <div class="justify-center flex h-[90.5vh] items-center bg-slate-200">
@@ -16,15 +35,45 @@
 			<Card.Content class="grid gap-4">
 				<div class="grid gap-2">
 					<Label for="username">Username</Label>
-					<Input id="username" type="text" placeholder="Username" name="username" />
+					<Input
+						id="username"
+						type="text"
+						bind:value={$form.username}
+						{...$constraints.username}
+						placeholder="Username"
+						name="username"
+					/>
+					{#if $errors.username}
+						<p>{$errors.username}</p>
+					{/if}
 				</div>
 				<div class="grid gap-2">
 					<Label for="email">Email</Label>
-					<Input id="email" type="email" placeholder="m@example.com" name="email" />
+
+					<Input
+						id="email"
+						type="email"
+						bind:value={$form.email}
+						{...$constraints.email}
+						placeholder="m@example.com"
+						name="email"
+					/>
+					{#if $errors.email}
+						<p class="text-xs text-red-500">{$errors.email}</p>
+					{/if}
 				</div>
 				<div class="grid gap-2">
 					<Label for="password">Password</Label>
-					<Input id="password" type="password" placeholder="Password" name="password" />
+					<Input
+						id="password"
+						bind:value={$form.password}
+						type="password"
+						placeholder="Password"
+						name="password"
+					/>
+					{#if $errors.password}
+						<p class="text-xs text-red-500">Password must contain 6 characters</p>
+					{/if}
 				</div>
 			</Card.Content>
 			<Card.Footer>
@@ -40,3 +89,4 @@
 		</Card.Footer>
 	</Card.Root>
 </div>
+<Toaster />

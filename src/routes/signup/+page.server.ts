@@ -1,29 +1,44 @@
 import { auth } from "$lib/server/lucia";
 import { fail, redirect } from "@sveltejs/kit";
-
-
 import type { PageServerLoad, Actions } from "./$types";
-import { profile } from "$lib/server/schema";
+import { profile, user } from "$lib/server/schema";
 import { db } from "$lib/server";
 import supabase from "$lib";
+import { z } from 'zod';
+import { setError, superValidate } from 'sveltekit-superforms/server';
+import { eq } from "drizzle-orm";
+
+let signUpSchema = z.object({
+    username: z.string(),
+    email: z.string().email(),
+    password: z.string().min(6),
+})
 
 export const load: PageServerLoad = async ({ locals }) => {
     const session = await locals.auth.validate();
     if (session) throw redirect(302, "/");
-    return {};
+    let form = await superValidate(signUpSchema);
+    return { form };
 };
 
 export const actions: Actions = {
     default: async ({ request, locals, url }) => {
-        let formData = await request.formData();
-        let email = formData.get("email")?.toString();
-        let password = formData.get("password")?.toString();
-        let username = String(formData.get("username"));
+        let form = await superValidate(request, signUpSchema);
+        console.log('Post', form);
+
+        if (!form.valid) {
+            return fail(400, { form });
+        }
+        let isemailpresent = await db.select().from(user).where(eq(user.email, form.data.email));
+        if (isemailpresent.length > 0) {
+            // console.log('email already exists');
+            return setError(form, 'email', 'E-mail already exists.');;
+        }
+        let email = form.data.email;
+        let password = form.data.password;
+        let username = form.data.username;
         username = username.split(" ").join("");
-        // console.log(username, 'username');
-
         let profileLink = url.origin + "/profiles/" + username;
-
         try {
             let user = await auth.createUser({
                 key: {
@@ -33,7 +48,7 @@ export const actions: Actions = {
 
                 },
                 attributes: {
-                    email: String(email),
+                    email: email,
                     username: username
                 },
             });
@@ -41,16 +56,17 @@ export const actions: Actions = {
                 {
                     username: username,
                     socialProfileLink: profileLink,
+                    userImage: 'https://i.pinimg.com/564x/90/2b/84/902b841f3567ff8282b5db97c257aef1.jpg'
                 }
             )
             const session = await auth.createSession({
                 userId: user.userId,
                 attributes: {}
             });
-            const { data, error } = await supabase.auth.signUp({
-                email: email,
-                password: password,
-            })
+            // const { data, error } = await supabase.auth.signUp({
+            //     email: email,
+            //     password: password,
+            // })
             locals.auth.setSession(session); // set session cookie
         } catch (e) {
             console.log(e);
@@ -58,6 +74,6 @@ export const actions: Actions = {
                 message: "An unknown error occurred"
             });
         }
-        throw redirect(302, "/edit");
+        return { form };
     }
 };
