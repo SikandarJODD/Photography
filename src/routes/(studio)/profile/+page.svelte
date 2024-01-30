@@ -5,6 +5,7 @@
 	import { page } from '$app/stores';
 	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
 	import PicGrid from '$lib/home/photos/PicGrid.svelte';
+	import ProTabs from '$lib/home/profiletabs/ProTabs.svelte';
 	let profile = $page.data.userProfile;
 	export let data;
 	let allimages = data.allposts.filter((item) => item.username === profile.username);
@@ -76,6 +77,16 @@
 					</Button>
 				{/each}
 			</div>
+		</div>
+	</div>
+	<Separator />
+	<div class="flex flex-col md:flex-row my-4">
+		<div class="md:w-1/2">
+			<h1 class="text-xl font-semibold">Bio</h1>
+			<p class="mt-2">coding is fun</p>
+		</div>
+		<div class="md:w-1/2 flex items-center justify-center">
+			<ProTabs />
 		</div>
 	</div>
 	<Separator />
