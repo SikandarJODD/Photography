@@ -6,6 +6,7 @@
 	$: routeID = $page.route.id?.split('/') || '/';
 	export let data;
 	import { onNavigate } from '$app/navigation';
+	import { Toaster } from '$lib/components/ui/sonner';
 
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
@@ -19,6 +20,7 @@
 	});
 </script>
 
+<Toaster />
 {#if routeID[1] !== '(studio)'}
 	<Navbar email={data.email} />
 {/if}

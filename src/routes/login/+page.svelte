@@ -1,9 +1,26 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
 	import { Label } from '$lib/components/ui/label';
+	import { toast } from 'svelte-sonner';
+	import { superForm } from 'sveltekit-superforms/client';
+
+	export let data;
+	let { form, errors, enhance, message } = superForm(data.form, {
+		onUpdated({ form }) {
+			if (form.valid) {
+				toast.success('Login successful!');
+				setTimeout(() => {
+					goto('/photos');
+				}, 600);
+			}
+			if (!form.valid) {
+				toast.error('Invalid Email or Password');
+			}
+		}
+	});
 </script>
 
 <div class="justify-center flex h-[90.5vh] items-center bg-slate-200">
@@ -16,11 +33,25 @@
 			<Card.Content class="grid gap-4">
 				<div class="grid gap-2">
 					<Label for="email">Email</Label>
-					<Input id="email" type="email" placeholder="m@example.com" name="email" />
+					<Input
+						id="email"
+						bind:value={$form.email}
+						type="email"
+						placeholder="john@example.com"
+						name="email"
+					/>
+					{#if $errors.email}<span class="text-sm text-red-500">{$errors.email}</span>{/if}
 				</div>
 				<div class="grid gap-2">
 					<Label for="password">Password</Label>
-					<Input id="password" type="password" placeholder="Password" name="password" />
+					<Input
+						id="password"
+						bind:value={$form.password}
+						type="password"
+						placeholder="Password"
+						name="password"
+					/>
+					{#if $errors.password}<span class="text-sm text-red-500">{$errors.password}</span>{/if}
 				</div>
 			</Card.Content>
 			<Card.Footer>

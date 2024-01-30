@@ -1,48 +1,45 @@
 // routes/login/+page.server.ts
 import { auth } from "$lib/server/lucia";
 import { LuciaError } from "lucia";
-import { fail, redirect } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
+import { z } from 'zod'
+import { message, superValidate } from 'sveltekit-superforms/server'
+let loginSchema = z.object({
+    email: z.string().email(),
+    password: z.string().min(6).max(100),
+})
 
 import type { Actions } from "./$types";
-
+export const load = async () => {
+    let form = await superValidate(loginSchema);
+    return { form };
+};
 export const actions: Actions = {
     default: async ({ request, locals }) => {
-        const formData = await request.formData();
-        const email = formData.get("email");
-        const password = formData.get("password");
+        let form = await superValidate(request, loginSchema);
+        // console.log(form);
 
-        // basic check
-        if (
-            typeof email !== "string" ||
-            email.length < 1 ||
-            email.length > 31
-        ) {
-            return fail(400, {
-                message: "Invalid email"
-            });
+
+        let email = form.data.email;
+        let password = form.data.password;
+
+        if (!form.valid) {
+            return fail(400, { form });
         }
-        if (
-            typeof password !== "string" ||
-            password.length < 1 ||
-            password.length > 255
-        ) {
-            return fail(400, {
-                message: "Invalid password"
-            });
-        }
+
         try {
-            // find user by key
-            // and validate password
             const user = await auth.useKey(
                 "email",
                 email.toLowerCase(),
                 password
             );
+            console.log(user, 'USER');
+
             const session = await auth.createSession({
                 userId: user.userId,
                 attributes: {}
             });
-            locals.auth.setSession(session); // set session cookie
+            locals.auth.setSession(session);
         } catch (e) {
             if (
                 e instanceof LuciaError &&
@@ -51,16 +48,14 @@ export const actions: Actions = {
             ) {
                 // user does not exist
                 // or invalid password
-                return fail(400, {
-                    message: "Incorrect email of password"
+                return message(form, 'Incorrect Email or Password', {
+                    status: 400,
                 });
             }
             return fail(500, {
                 message: "An unknown error occurred"
             });
         }
-        // redirect to
-        // make sure you don't throw inside a try/catch block!
-        throw redirect(302, "/profiles");
+        return message(form, 'Logged in successfully');
     }
 };

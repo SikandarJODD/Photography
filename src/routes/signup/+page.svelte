@@ -1,6 +1,4 @@
 <script lang="ts">
-	import { Toaster } from '$lib/components/ui/sonner';
-	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import * as Card from '$lib/components/ui/card';
 	import { Input } from '$lib/components/ui/input';
@@ -9,10 +7,9 @@
 	import type { PageData } from './$types';
 	import { toast } from 'svelte-sonner';
 	import { goto } from '$app/navigation';
-	import { Loading } from '$lib/components/ui/command';
 
 	export let data: PageData;
-	let { form, errors, constraints } = superForm(data.form, {
+	let { form, errors, constraints, enhance } = superForm(data.form, {
 		resetForm: true,
 		onUpdated({ form }) {
 			if (form.valid) {
@@ -89,4 +86,3 @@
 		</Card.Footer>
 	</Card.Root>
 </div>
-<Toaster />
