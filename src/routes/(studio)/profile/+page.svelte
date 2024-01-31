@@ -6,6 +6,7 @@
 	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
 	import PicGrid from '$lib/home/photos/PicGrid.svelte';
 	import ProTabs from '$lib/home/profiletabs/ProTabs.svelte';
+	import ProDesc from '$lib/home/profiletabs/ProDesc.svelte';
 	let profile = $page.data.userProfile;
 	export let data;
 	let allimages = data.allposts.filter((item) => item.username === profile.username);
@@ -80,12 +81,11 @@
 		</div>
 	</div>
 	<Separator />
-	<div class="flex flex-col md:flex-row my-4">
-		<div class="md:w-1/2">
-			<h1 class="text-xl font-semibold">Bio</h1>
-			<p class="mt-2">coding is fun</p>
+	<div class="flex flex-col md:flex-row my-4 gap-4 md:gap-0">
+		<div class="md:w-3/5">
+			<ProDesc />
 		</div>
-		<div class="md:w-1/2 flex items-center justify-center">
+		<div class="md:w-2/5 flex items-center justify-center">
 			<ProTabs />
 		</div>
 	</div>
