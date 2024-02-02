@@ -6,7 +6,7 @@ import { eq } from "drizzle-orm";
 import type { Actions } from "./$types";
 
 export const actions: Actions = {
-    profileInfo: async ({ request, locals }) => {
+    default: async ({ request, locals }) => {
         let session = await locals.auth.validate();
         if (session) {
             let username = session.user.username
@@ -54,14 +54,14 @@ export const actions: Actions = {
             }
         }
     },
-    basic: async ({ request }) => {
-        let form = await request.formData();
-        console.log(form, 'Basic Form');
-        // let smLen = form.get('basic-feature-len');
-        // for (let i = 0; i < Number(smLen); i++) {
-        //     let sm = form.get(`revision-work-${i}`);
-        //     console.log(sm);
-        // }
+    // basic: async ({ request }) => {
+    //     let form = await request.formData();
+    //     console.log(form, 'Basic Form');
+    //     // let smLen = form.get('basic-feature-len');
+    //     // for (let i = 0; i < Number(smLen); i++) {
+    //     //     let sm = form.get(`revision-work-${i}`);
+    //     //     console.log(sm);
+    //     // }
 
-    }
+    // }
 };

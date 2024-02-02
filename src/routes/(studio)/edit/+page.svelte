@@ -18,7 +18,7 @@
 	};
 </script>
 
-<form method="post" use:enhance action="?/profileInfo">
+<form method="post" use:enhance>
 	<div class="dark:bg-slate-950">
 		<div class="border-b border-white/10 pb-8">
 			<h2 class="text-xl font-semibold leading-7 text-primary md:font-bold lg:text-3xl">
@@ -124,4 +124,4 @@
 		>
 	</div>
 </form>
-<FeatureForm feature="basic" />
+<!-- <FeatureForm feature="basic" /> -->
