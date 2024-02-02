@@ -4,6 +4,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import FeatureForm from '$lib/home/editForms/FeatureForm.svelte';
 	import userIcon from '$lib/images/icons/userIcon.jpg';
 	import { Instagram, Save, Upload } from 'lucide-svelte';
 	let avatar, fileinput;
@@ -17,8 +18,8 @@
 	};
 </script>
 
-<form method="post" use:enhance>
-	<div class="dark:bg-gray-950">
+<form method="post" use:enhance action="?/profileInfo">
+	<div class="dark:bg-slate-950">
 		<div class="border-b border-white/10 pb-8">
 			<h2 class="text-xl font-semibold leading-7 text-primary md:font-bold lg:text-3xl">
 				Edit Profile
@@ -123,3 +124,4 @@
 		>
 	</div>
 </form>
+<FeatureForm feature="basic" />

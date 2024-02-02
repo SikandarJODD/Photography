@@ -23,8 +23,8 @@
 	});
 </script>
 
-<div class="justify-center flex h-[90.5vh] items-center bg-slate-200">
-	<Card.Root class="md:w-[400px] shadow-md shadow-slate-300">
+<div class="justify-center flex h-[90.5vh] items-center bg-slate-200 dark:bg-gray-950">
+	<Card.Root class="md:w-[400px] shadow-md shadow-slate-300 dark:shadow-gray-900">
 		<Card.Header class="space-y-1">
 			<Card.Title class="text-2xl">Login to Continue</Card.Title>
 			<Card.Description>Enter your email and password to Visit Dashboard</Card.Description>
