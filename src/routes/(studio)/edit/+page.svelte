@@ -4,6 +4,7 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import Textarea from '$lib/components/ui/textarea/textarea.svelte';
+	import * as Select from '$lib/components/ui/select';
 	import FeatureForm from '$lib/home/editForms/FeatureForm.svelte';
 	import userIcon from '$lib/images/icons/userIcon.jpg';
 	import { Instagram, Save, Upload } from 'lucide-svelte';
@@ -16,6 +17,7 @@
 			avatar = e.target.result;
 		};
 	};
+	let isCategory = 0;
 </script>
 
 <form method="post" use:enhance action="?/profileForm">
@@ -124,6 +126,30 @@
 		>
 	</div>
 </form>
-<FeatureForm feature="basic" />
-<FeatureForm feature="standard" />
-<FeatureForm feature="premium" />
+<div class="flex gap-4 flex-col mb-4">
+	<div>
+		<h2 class="text-xl md:text-3xl font-bold mb-1">Select Category</h2>
+		<p class="text-primary/70 text-sm">
+			Select the category to add features, price,delivery time and more
+		</p>
+	</div>
+	<Select.Root>
+		<Select.Trigger class="w-full md:w-[180px]">
+			<Select.Value placeholder="Category" />
+		</Select.Trigger>
+		<Select.Content>
+			<Select.Item value="0" on:click={() => (isCategory = 0)}>Basic</Select.Item>
+			<Select.Item value="1" on:click={() => (isCategory = 1)}>Standard</Select.Item>
+			<Select.Item value="2" on:click={() => (isCategory = 2)}>Premium</Select.Item>
+		</Select.Content>
+	</Select.Root>
+</div>
+<div>
+	{#if isCategory === 0}
+		<FeatureForm feature="basic" />
+	{:else if isCategory === 1}
+		<FeatureForm feature="standard" />
+	{:else if isCategory === 2}
+		<FeatureForm feature="premium" />
+	{/if}
+</div>
