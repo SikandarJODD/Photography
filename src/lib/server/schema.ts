@@ -77,4 +77,12 @@ export let featureStuff = pgTable("featuresStuff", {
     revision: numeric("revision"),
     desc: text("desc"),
     features: text("features"),
-})
+});
+
+export let userDetailInfo = pgTable("userDetailInfo", {
+    id: serial("id").primaryKey().notNull(),
+    username: text("user_id").references(() => user.username),
+    expertIn: text("expert_in"),
+    about: text("about"),
+    skills: text("skills"),
+}); 

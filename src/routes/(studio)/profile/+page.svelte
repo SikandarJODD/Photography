@@ -9,6 +9,8 @@
 	import ProDesc from '$lib/home/profiletabs/ProDesc.svelte';
 	let profile = $page.data.userProfile;
 	export let data;
+	// console.log(data.featuresProfile, 'Features Stuff');
+
 	let allimages = data.allposts.filter((item) => item.username === profile.username);
 
 	let socials = [
@@ -86,7 +88,7 @@
 			<ProDesc />
 		</div>
 		<div class="md:w-2/5 flex items-center justify-center">
-			<ProTabs />
+			<ProTabs featuresData={data.featuresProfile} />
 		</div>
 	</div>
 	<Separator />

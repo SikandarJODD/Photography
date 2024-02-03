@@ -1,7 +1,7 @@
 import { PUBLIC_BUCKET_NAME } from "$env/static/public";
 import supabase from "$lib";
 import { db } from "$lib/server";
-import { featureStuff, profile } from "$lib/server/schema";
+import { featureStuff, profile, userDetailInfo } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
 import type { Actions } from "./$types";
 
@@ -81,5 +81,26 @@ export const actions: Actions = {
             })
 
         }
+
+    },
+    userDetail: async ({ request, locals }) => {
+        let session = await locals.auth.validate();
+        if (session) {
+            let username = session.user.username;
+
+            let form = await request.formData();
+            console.log(form, 'User Detail Form');
+            let expertIn = form.get('expert_feild');
+            let about = form.get('user_d_info');
+            let skills = form.get('user_skills');
+
+            await db.insert(userDetailInfo).values({
+                username: String(username),
+                expertIn: String(expertIn),
+                about: String(about),
+                skills: (skills),
+            })
+        }
+
     }
 };
