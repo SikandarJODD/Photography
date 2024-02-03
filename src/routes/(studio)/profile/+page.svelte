@@ -1,15 +1,15 @@
 <script lang="ts">
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { Instagram, Linkedin, PenSquare, Twitter, CopyCheck } from 'lucide-svelte';
+	import { Instagram, Linkedin, PenSquare, Twitter, CopyCheck, Share2 } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import IsLoginAleart from '$lib/home/comps/IsLoginAleart.svelte';
 	import PicGrid from '$lib/home/photos/PicGrid.svelte';
 	import ProTabs from '$lib/home/profiletabs/ProTabs.svelte';
 	import ProDesc from '$lib/home/profiletabs/ProDesc.svelte';
+	import { toast } from 'svelte-sonner';
 	let profile = $page.data.userProfile;
 	export let data;
-	// console.log(data.featuresProfile, 'Features Stuff');
 
 	let allimages = data.allposts.filter((item) => item.username === profile.username);
 
@@ -28,7 +28,7 @@
 		},
 		{
 			link: $page.data.userProfile.socialProfileLink || '',
-			icon: CopyCheck
+			icon: Share2
 		}
 	];
 
@@ -36,6 +36,10 @@
 	$: btnsize = screenwidth < 500 ? 'sm' : 'default';
 	let email = $page.data.email || '';
 	$: isOpen = email.length === 0 ? true : false;
+	let copyLink = () => {
+		navigator.clipboard.writeText($page.data.userProfile.socialProfileLink);
+		toast.success('Profile Link Copied!');
+	};
 </script>
 
 <svelte:window bind:innerWidth={screenwidth} />
@@ -53,7 +57,13 @@
 			<div class="flex items-center justify-between mb-2">
 				<h2 class="text-md font-semibold">@{profile.username}</h2>
 				<div>
-					<Button href="/edit" size={btnsize} class="px-1.5 md:px-3">
+					<Button
+						href="/edit"
+						variant="outline"
+						size={btnsize}
+						class="px-1.5 md:px-3 border-primary/50"
+						on:click={copyLink}
+					>
 						<PenSquare size="18" strokeWidth="1.3" class="sm:mr-1.5" />
 						{screenwidth > 500 ? 'Edit' : ''}
 					</Button>
@@ -69,15 +79,28 @@
 				>
 			</div>
 			<div class="mt-4 -ml-8 sm:ml-0 flex items-center gap-x-4">
-				{#each socials as item}
-					<Button
-						size="icon"
-						class="md:h-10 md:w-10"
-						href={item.link ? item.link : '/'}
-						target="_blank"
-					>
-						<svelte:component this={item.icon} strokeWidth="1.5" />
-					</Button>
+				{#each socials as item, i}
+					{#if i == socials.length - 1}
+						<Button
+							variant="outline"
+							size="icon"
+							class="md:h-9 md:w-9 p-1.5 border-primary/50 hover:bg-primary/10 transition-all duration"
+							target="_blank"
+							on:click={copyLink}
+						>
+							<svelte:component this={item.icon} strokeWidth="1.5" />
+						</Button>
+					{:else}
+						<Button
+							variant="outline"
+							size="icon"
+							class="md:h-9 md:w-9 p-1.5 border-primary/50 hover:bg-primary/10 transition-all duration"
+							href={item.link ? item.link : '/'}
+							target="_blank"
+						>
+							<svelte:component this={item.icon} strokeWidth="1.5" />
+						</Button>
+					{/if}
 				{/each}
 			</div>
 		</div>
@@ -85,7 +108,7 @@
 	<Separator />
 	<div class="flex flex-col md:flex-row my-4 gap-4 md:gap-0">
 		<div class="md:w-3/5">
-			<ProDesc />
+			<ProDesc details={data.userDetailedInfo} />
 		</div>
 		<div class="md:w-2/5 flex items-center justify-center">
 			<ProTabs featuresData={data.featuresProfile} />

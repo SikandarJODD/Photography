@@ -1,4 +1,4 @@
-import { featureStuff, posts, profile } from "$lib/server/schema";
+import { featureStuff, posts, profile, userDetailInfo } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
 import { db } from "$lib/server";
 
@@ -9,6 +9,7 @@ export const load = async ({ locals }) => {
     if (session) {
         let userName = session.user.username;
         let featuresProfile = await db.select().from(featureStuff).where(eq(featureStuff.username, userName));
+        let userDetailedInfo = await db.select().from(userDetailInfo).where(eq(userDetailInfo.username, userName));
         // console.log(userName, 'User name');
         let userProfile = await db.select().from(profile).where(eq(profile.username, userName));
         return {
@@ -17,7 +18,8 @@ export const load = async ({ locals }) => {
             userProfile: userProfile[0],
             allprofiles: allprofiles,
             allposts: allPosts,
-            featuresProfile: featuresProfile
+            featuresProfile: featuresProfile,
+            userDetailedInfo: userDetailedInfo[0]
         };
     }
     return {
@@ -26,6 +28,7 @@ export const load = async ({ locals }) => {
         userProfile: {},
         allprofiles: allprofiles,
         allposts: allPosts,
-        featuresProfile: []
+        featuresProfile: [],
+        userDetailedInfo: []
     };
 };

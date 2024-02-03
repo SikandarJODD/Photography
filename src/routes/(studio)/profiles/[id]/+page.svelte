@@ -1,9 +1,12 @@
 <script lang="ts">
 	import Separator from '$lib/components/ui/separator/separator.svelte';
 	import Button from '$lib/components/ui/button/button.svelte';
-	import { Instagram, Linkedin, Twitter, CopyCheck, Mail } from 'lucide-svelte';
+	import { Instagram, Linkedin, Twitter, CopyCheck, Mail, Share2 } from 'lucide-svelte';
 	import { page } from '$app/stores';
 	import PicGrid from '$lib/home/photos/PicGrid.svelte';
+	import ProDesc from '$lib/home/profiletabs/ProDesc.svelte';
+	import ProTabs from '$lib/home/profiletabs/ProTabs.svelte';
+	import { toast } from 'svelte-sonner';
 	// Show Profile Code
 	export let data;
 	let profileName = $page.url.pathname.split('/')[2];
@@ -30,11 +33,11 @@
 		{
 			link: filterProfile.socialLinked || '',
 			icon: Linkedin
+		},
+		{
+			link: filterProfile.socialProfileLink || '',
+			icon: Share2
 		}
-		// {
-		// 	link: filterProfile.socialProfileLink || '',
-		// 	icon: CopyCheck
-		// }
 	];
 
 	let screenwidth = 0;
@@ -75,18 +78,41 @@
 				>
 			</div>
 			<div class="mt-4 sm:ml-0 flex items-center gap-x-4">
-				{#each socials as item}
-					<Button
-						size="icon"
-						variant="outline"
-						class="md:h-10 md:w-10 border-primary/60"
-						href={item.link}
-						target="_blank"
-					>
-						<svelte:component this={item.icon} strokeWidth="1.4" />
-					</Button>
+				{#each socials as item, i}
+					{#if i === socials.length - 1}
+						<Button
+							size="icon"
+							variant="outline"
+							class="md:h-10 md:w-10 border-primary/60"
+							on:click={() => {
+								navigator.clipboard.writeText(item.link);
+								toast.success('Profile Link Copied!');
+							}}
+						>
+							<svelte:component this={item.icon} strokeWidth="1.4" />
+						</Button>
+					{:else}
+						<Button
+							size="icon"
+							variant="outline"
+							class="md:h-10 md:w-10 border-primary/60"
+							href={item.link}
+							target="_blank"
+						>
+							<svelte:component this={item.icon} strokeWidth="1.4" />
+						</Button>
+					{/if}
 				{/each}
 			</div>
+		</div>
+	</div>
+	<Separator />
+	<div class="flex flex-col md:flex-row my-4 gap-4 md:gap-0">
+		<div class="md:w-3/5">
+			<ProDesc details={data.fdetails} />
+		</div>
+		<div class="md:w-2/5 flex items-center justify-center">
+			<ProTabs featuresData={data.fprofilUser} />
 		</div>
 	</div>
 	<Separator />
