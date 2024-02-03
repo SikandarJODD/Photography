@@ -5,35 +5,34 @@
 	import Input from '$lib/components/ui/input/input.svelte';
 	import Label from '$lib/components/ui/label/label.svelte';
 	import { Description } from '$lib/components/ui/alert-dialog';
+	import { enhance } from '$app/forms';
 
 	export let feature: string;
-	/*
-    pic:3,                   // Int - pic, price, delivery, revision
-	price:3000,
-	delivery :4,
-	revision:2,
-    */
+
 	let smFeatures = [
 		{
 			text: '',
 			status: false,
-			id: crypto.randomUUID()
+			id: crypto.randomUUID().slice(0, 10)
 		}
 	];
 
 	let addSmFeatures = () => {
 		if (smFeatures.length <= 5) {
-			smFeatures = [...smFeatures, { text: '', status: false, id: crypto.randomUUID() }];
+			smFeatures = [
+				...smFeatures,
+				{ text: '', status: false, id: crypto.randomUUID().slice(0, 10) }
+			];
 		}
 	};
 	$: pas = JSON.stringify(smFeatures);
 </script>
 
-<form action="?/{feature}" method="post">
+<form action="?/basic" method="post" use:enhance>
 	<div class="dark:bg-slate-950">
 		<div class="border-b border-white/10 pb-8">
-			<h2 class="text-xl font-semibold leading-7 text-primary md:font-bold lg:text-3xl">
-				Basic - Category
+			<h2 class="text-xl font-semibold leading-7 text-primary md:font-bold lg:text-3xl capitalize">
+				{feature} - Category
 			</h2>
 			<p class="mt-1 text-sm leading-6 text-primary/70">
 				Basic Category includes the basic information about you provide to the customer.
@@ -45,7 +44,7 @@
 						<Label for="name">Pictures</Label>
 						<div class="mt-1.5">
 							<Input
-								type="text"
+								type="number"
 								name="pictures"
 								id="pictures"
 								placeholder="how many pictrues you provide ?"
@@ -55,14 +54,14 @@
 					<div>
 						<Label for="insta">Price</Label>
 						<div class="mt-1.5">
-							<Input type="text" name="price" id="price-img" placeholder="Price of your work" />
+							<Input type="number" name="price" id="price-img" placeholder="Price of your work" />
 						</div>
 					</div>
 					<div>
 						<Label for="twitter">Delivery</Label>
 						<div class="mt-1.5">
 							<Input
-								type="text"
+								type="number"
 								name="delivery-time"
 								id="delivery-time"
 								placeholder="how much time you need to deliver ?"
@@ -73,7 +72,7 @@
 						<Label for="linked">Revision</Label>
 						<div class="mt-1.5">
 							<Input
-								type="text"
+								type="number"
 								name="revision-work"
 								id="revision-work"
 								placeholder=" how much revisions you provide ? "
@@ -111,17 +110,17 @@
 										placeholder="List of Features with Status"
 										bind:value={item.text}
 									/>
+									<Checkbox
+										id="revision-work-{i}"
+										bind:checked={item.status}
+										class="text-primary"
+									/>
 								</div>
 							</div>
 						{/each}
-						<input
-							type="hidden"
-							class="hidden"
-							name="basic-feature-len"
-							id="basic-feature-len"
-							bind:value={smFeatures.length}
-						/>
-						<input type="hidden" name="do" id="do" bind:value={pas} />
+
+						<input type="hidden" name="bfeatures" id="bfeatures" bind:value={pas} />
+						<input type="hidden" name="typefeature" id="typefeature" bind:value={feature} />
 					</div>
 				</div>
 			</div>

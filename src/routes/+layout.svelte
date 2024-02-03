@@ -1,6 +1,7 @@
 <script>
 	import { page } from '$app/stores';
 	import Navbar from '$lib/home/comps/Navbar.svelte';
+	import { ModeWatcher } from 'mode-watcher';
 	import '../app.pcss';
 	import '../app.css';
 	$: routeID = $page.route.id?.split('/') || '/';
@@ -20,6 +21,7 @@
 	});
 </script>
 
+<ModeWatcher />
 <Toaster />
 {#if routeID[1] !== '(studio)'}
 	<Navbar email={data.email} />

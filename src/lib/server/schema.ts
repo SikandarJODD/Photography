@@ -1,5 +1,5 @@
 // schema.js
-import { pgTable, bigint, varchar, numeric, text, serial } from "drizzle-orm/pg-core";
+import { pgTable, bigint, varchar, numeric, text, serial, json } from "drizzle-orm/pg-core";
 
 export let user = pgTable("auth_user", {
     id: varchar("id", {
@@ -65,4 +65,16 @@ export let brocode = pgTable("brocode", {
     id: serial("id").primaryKey().notNull(),
     brocode: text("brocode"),
     age: numeric("age"),
+})
+
+export let featureStuff = pgTable("featuresStuff", {
+    id: serial("id").primaryKey().notNull(),
+    username: text("user_id").references(() => user.username),
+    type: text("type"),
+    pic: numeric("pic"),
+    price: numeric("price"),
+    delivery: numeric("delivery"),
+    revision: numeric("revision"),
+    desc: text("desc"),
+    features: text("features"),
 })

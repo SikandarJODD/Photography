@@ -1,12 +1,12 @@
 import { PUBLIC_BUCKET_NAME } from "$env/static/public";
 import supabase from "$lib";
 import { db } from "$lib/server";
-import { profile } from "$lib/server/schema";
+import { featureStuff, profile } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
 import type { Actions } from "./$types";
 
 export const actions: Actions = {
-    default: async ({ request, locals }) => {
+    profileForm: async ({ request, locals }) => {
         let session = await locals.auth.validate();
         if (session) {
             let username = session.user.username
@@ -54,14 +54,32 @@ export const actions: Actions = {
             }
         }
     },
-    // basic: async ({ request }) => {
-    //     let form = await request.formData();
-    //     console.log(form, 'Basic Form');
-    //     // let smLen = form.get('basic-feature-len');
-    //     // for (let i = 0; i < Number(smLen); i++) {
-    //     //     let sm = form.get(`revision-work-${i}`);
-    //     //     console.log(sm);
-    //     // }
+    basic: async ({ request, locals }) => {
+        let session = await locals.auth.validate();
+        if (session) {
+            let username = session.user.username;
 
-    // }
+            let form = await request.formData();
+            console.log(form, 'Basic Form');
+            let type = form.get('typefeature');
+            let pic = Number(form.get('pictures'));
+            let price = Number(form.get('price'));
+            let delivery = Number(form.get('delivery-time'));
+            let revision = Number(form.get('revision-work'));
+            let desc = form.get('desc-feature');
+            let bfeatures = form.get('bfeatures');
+
+            await db.insert(featureStuff).values({
+                username: String(username),
+                type: String(type),
+                pic: Number(pic),
+                price: Number(price),
+                delivery: Number(delivery),
+                revision: Number(revision),
+                desc: String(desc),
+                features: String(bfeatures),
+            })
+
+        }
+    }
 };
