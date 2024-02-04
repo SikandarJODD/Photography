@@ -3,7 +3,30 @@ import supabase from "$lib";
 import { db } from "$lib/server";
 import { featureStuff, profile, userDetailInfo } from "$lib/server/schema";
 import { eq } from "drizzle-orm";
-import type { Actions } from "./$types";
+import type { Actions, PageServerLoad } from "./$types";
+import { redirect } from "@sveltejs/kit";
+export const load: PageServerLoad = async ({ locals }) => {
+    let session = await locals.auth.validate();
+    if (session) {
+        let username = session.user.username;
+        let data = await db.select().from(profile).where(eq(profile.username, String(username)));
+        let feature = await db.select().from(featureStuff).where(eq(featureStuff.username, String(username)));
+        let userDetail = await db.select().from(userDetailInfo).where(eq(userDetailInfo.username, String(username)));
+        // console.log('Data', data);
+        // console.log('Feature', feature);
+        // console.log('User Detail', userDetail);
+        return {
+            info: data[0],
+            feature: feature[0],
+            userDetail: userDetail[0]
+        }
+    }
+    else {
+        redirect(302, '/login');
+    }
+
+
+}
 
 export const actions: Actions = {
     profileForm: async ({ request, locals }) => {
@@ -18,38 +41,44 @@ export const actions: Actions = {
             let tweet = form.get('twitter');
             let linked = form.get('linked')
             let image = form.get('inputImage');
-            let randomString = crypto.randomUUID().slice(0, 8) + ".jpg";
-            console.log(username, 'USERNAME');
-
-            console.log('randomString', randomString);
-
-            let imgURL = '';
-
-            try {
-                const { data, error } = await supabase
-                    .storage
-                    .from(PUBLIC_BUCKET_NAME)
-                    .upload(randomString, image)
-                console.log('Uplaoded Data', data);
+            if (image.size === 0) {
+                await db.update(profile).set({
+                    firstName: String(name),
+                    desc: String(desc),
+                    socialInsta: String(insta),
+                    socialLinked: String(linked),
+                    socialTweet: String(tweet)
+                }).where(eq(profile.username, String(username)));
             }
-            catch (e) {
-                console.log(e);
-            }
-            finally {
-                console.log('Form Submitted Successfully');
+            else {
+                let randomString = crypto.randomUUID().slice(0, 8) + ".jpg";
+                let imgURL = '';
                 try {
-                    let { data } = supabase.storage.from(PUBLIC_BUCKET_NAME).getPublicUrl(randomString);
-                    imgURL = data.publicUrl;
+                    const { data, error } = await supabase
+                        .storage
+                        .from(PUBLIC_BUCKET_NAME)
+                        .upload(randomString, image)
+                    console.log('Uplaoded Data', data);
+                }
+                catch (e) {
+                    console.log(e);
                 }
                 finally {
-                    await db.update(profile).set({
-                        firstName: String(name),
-                        userImage: String(imgURL),
-                        desc: String(desc),
-                        socialInsta: String(insta),
-                        socialLinked: String(linked),
-                        socialTweet: String(tweet)
-                    }).where(eq(profile.username, String(username)));
+                    console.log('Form Submitted Successfully');
+                    try {
+                        let { data } = supabase.storage.from(PUBLIC_BUCKET_NAME).getPublicUrl(randomString);
+                        imgURL = data.publicUrl;
+                    }
+                    finally {
+                        await db.update(profile).set({
+                            firstName: String(name),
+                            userImage: String(imgURL),
+                            desc: String(desc),
+                            socialInsta: String(insta),
+                            socialLinked: String(linked),
+                            socialTweet: String(tweet)
+                        }).where(eq(profile.username, String(username)));
+                    }
                 }
             }
         }

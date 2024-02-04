@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import UserDetailsStuff from '$lib/home/editForms/userDetailsStuff.svelte';
 	import { enhance } from '$app/forms';
 	import Button from '$lib/components/ui/button/button.svelte';
@@ -19,6 +19,9 @@
 		};
 	};
 	let isCategory = 0;
+	export let data: any;
+	// let info = data.info;
+	// console.log(info, 'info');
 </script>
 
 <form method="post" use:enhance action="?/profileForm">
@@ -36,25 +39,46 @@
 					<div>
 						<Label for="name">Name</Label>
 						<div class="mt-1.5">
-							<Input placeholder="Your Name" name="name" id="name" />
+							<Input
+								placeholder="Your Name"
+								type="text"
+								name="name"
+								id="name"
+								bind:value={data.info.firstName}
+							/>
 						</div>
 					</div>
 					<div>
 						<Label for="insta">Instagram</Label>
 						<div class="mt-1.5">
-							<Input placeholder="instagram.com/aditya" name="insta" id="insta" />
+							<Input
+								placeholder="instagram.com/aditya"
+								name="insta"
+								id="insta"
+								bind:value={data.info.socialInsta}
+							/>
 						</div>
 					</div>
 					<div>
 						<Label for="twitter">Twitter</Label>
 						<div class="mt-1.5">
-							<Input placeholder="x.com/aditya" name="twitter" id="twitter" />
+							<Input
+								placeholder="x.com/aditya"
+								name="twitter"
+								id="twitter"
+								bind:value={data.info.socialTweet}
+							/>
 						</div>
 					</div>
 					<div>
 						<Label for="linked">Linked In</Label>
 						<div class="mt-1.5">
-							<Input placeholder="linkedin.com/aditya" name="linked" id="linked" />
+							<Input
+								placeholder="linkedin.com/aditya"
+								name="linked"
+								id="linked"
+								bind:value={data.info.socialLinked}
+							/>
 						</div>
 					</div>
 				</div>
@@ -67,6 +91,7 @@
 							name="desc"
 							id="desc"
 							rows="5"
+							bind:value={data.info.desc}
 						/>
 					</div>
 				</div>
