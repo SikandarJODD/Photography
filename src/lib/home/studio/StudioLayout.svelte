@@ -51,6 +51,11 @@
 			name: 'create',
 			link: '/create',
 			icon: ImagePlus
+		},
+		{
+			name: 'Notify',
+			link: '/dashboard',
+			icon: BellDot
 		}
 	];
 	// let teams = [
