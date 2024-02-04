@@ -14,13 +14,14 @@
 						<h1
 							class="mainTitle w-full md:w-fit text-center md:text-left text-4xl sm:text-4xl lg:text-4xl xl:text-6xl font-bold tracking-tight text-primary capitalize"
 						>
-							Capture the Best Moments with <span class="text-indigo-700">Photix</span>
+							Capture the Best Moments with <span class="text-indigo-700 dark:text-[#00A2FF]"
+								>Shutterspot</span
+							>
 						</h1>
 						<p
 							class="text-center lg:text-start relative mt-6 lg:my-8 text-lg leading-8 text-gray-500/80 sm:max-w-md lg:max-w-none lg:text-xl subtitle"
 						>
-							The art of <span class="text-primary">photography</span> is all about directing the attention
-							of the viewer.
+							Your Premier Destination for <span class="text-primary">Photography</span> Hire
 						</p>
 						<div class="mt-5 flex items-center justify-center md:justify-start gap-x-2 md:gap-x-6">
 							<Button size="lg" href="/profiles"

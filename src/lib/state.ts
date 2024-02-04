@@ -8,3 +8,5 @@ export let userNameStatus = writable('');
 export let profileStatus = writable({});
 
 // userProfile consist of all /profile Page Details 
+
+export let tabSelected = writable('basic');

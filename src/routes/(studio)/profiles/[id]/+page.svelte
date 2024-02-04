@@ -10,15 +10,12 @@
 	// Show Profile Code
 	export let data;
 	let profileName = $page.url.pathname.split('/')[2];
-	console.log(profileName, 'profile name');
 
 	let filterProfile = data.allprofiles.filter((item) => {
 		return item.username === profileName;
 	})[0];
-	console.log(filterProfile, 'filter profile');
 
 	let allimages = data.userPosts;
-	console.log(data);
 
 	let profile = filterProfile;
 	let socials = [
@@ -42,6 +39,7 @@
 
 	let screenwidth = 0;
 	$: btnsize = screenwidth < 500 ? 'sm' : 'default';
+	let isUsername = data.username || 'none';
 </script>
 
 <svelte:window bind:innerWidth={screenwidth} />
@@ -112,7 +110,7 @@
 			<ProDesc details={data.fdetails} />
 		</div>
 		<div class="md:w-2/5 flex items-center justify-center">
-			<ProTabs featuresData={data.fprofilUser} />
+			<ProTabs featuresData={data.fprofilUser} {isUsername} />
 		</div>
 	</div>
 	<Separator />

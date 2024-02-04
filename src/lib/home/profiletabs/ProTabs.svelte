@@ -3,6 +3,8 @@
 	import * as Card from '$lib/components/ui/card';
 	import { Button } from '$lib/components/ui/button';
 	import { BadgeCheck, MoveRight, RefreshCw, Sparkles, Timer, Check, X } from 'lucide-svelte';
+	import ContinueDailogue from '../AuthSpinner/ContinueDailogue.svelte';
+	import { tabSelected } from '$lib/state';
 	export let featuresData: any = [
 		{
 			id: 1,
@@ -41,6 +43,8 @@
 				'[{"text":"9 Photos Per Product","status":true,"id":"3cf0660f-c"},{"text":"1 Product","status":true,"id":"3ba241a5-1"},{"text":"Live Model","status":true,"id":"d333d10c-5"},{"text":"Lifestyle Staging","status":true,"id":"f6c089dc-6"}]'
 		}
 	];
+	export let isUsername = '';
+	console.log(isUsername);
 </script>
 
 {#if featuresData.length === 0}
@@ -55,6 +59,9 @@
 		<Tabs.List class="grid w-full grid-cols-3 *:mx-px md:h-12">
 			{#each featuresData as item}
 				<Tabs.Trigger
+					on:click={() => {
+						tabSelected.set(item.type);
+					}}
 					value={item.type}
 					class="h-full capitalize {item.type === 'premium'
 						? 'dark:bg-gradient-to-r from-fuchsia-600 to-blue-600 dark:text-primary'
@@ -154,10 +161,14 @@
 						</ul>
 					</Card.Content>
 					<Card.Footer class="w-full">
-						<Button class="w-full"
-							>Continue
-							<MoveRight class="ml-1.5 mt-px" size={20} strokeWidth={1.75} />
-						</Button>
+						{#if isUsername === 'none'}
+							<Button class="w-full" href="/login"
+								>Login to Hire
+								<MoveRight class="ml-1.5 mt-px" size={20} strokeWidth={1.75} />
+							</Button>
+						{:else}
+							<ContinueDailogue {isUsername} />
+						{/if}
 					</Card.Footer>
 				</Card.Root>
 			</Tabs.Content>

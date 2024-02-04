@@ -85,4 +85,13 @@ export let userDetailInfo = pgTable("userDetailInfo", {
     expertIn: text("expert_in"),
     about: text("about"),
     skills: text("skills"),
-}); 
+});
+// sender id as username , receiver id as photographers username 
+// text desc about the message and type as basic , standard , premium
+export let chat = pgTable("chat", {
+    id: serial("id").primaryKey().notNull(),
+    sender: text("sender").references(() => user.username),
+    receiver: text("receiver"),
+    desc: text("desc"),
+    type: text("type"),
+});

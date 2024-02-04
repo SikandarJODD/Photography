@@ -40,6 +40,8 @@
 		navigator.clipboard.writeText($page.data.userProfile.socialProfileLink);
 		toast.success('Profile Link Copied!');
 	};
+	let isUsername = data.username || 'none';
+	// console.log(isUsername, data.username, 'Check');
 </script>
 
 <svelte:window bind:innerWidth={screenwidth} />
@@ -111,7 +113,7 @@
 			<ProDesc details={data.userDetailedInfo} />
 		</div>
 		<div class="md:w-2/5 flex items-center justify-center">
-			<ProTabs featuresData={data.featuresProfile} />
+			<ProTabs featuresData={data.featuresProfile} {isUsername} />
 		</div>
 	</div>
 	<Separator />

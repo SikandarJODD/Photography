@@ -77,7 +77,7 @@
 		profileImg: 'https://i.pinimg.com/564x/88/db/6f/88db6fd38202de80d7c7c3964783cb04.jpg',
 		profileLink: '#',
 		topic: 'Dashboard',
-		webname: 'Camero'
+		webname: 'Shutterspot'
 	};
 	let input = '';
 	$: routeID = $page.route.id?.split('/') || '/';

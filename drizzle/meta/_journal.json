@@ -29,6 +29,13 @@
       "when": 1706996081175,
       "tag": "0003_elite_franklin_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1707026745078,
+      "tag": "0004_goofy_george_stacy",
+      "breakpoints": true
     }
   ]
 }

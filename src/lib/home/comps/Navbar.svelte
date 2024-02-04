@@ -1,15 +1,13 @@
 <script>
 	import Button from '$lib/components/ui/button/button.svelte';
-	import Badge from '$lib/components/ui/badge/badge.svelte';
 	import HomeIcon from '$lib/images/icons/home.png';
 	import { slide } from 'svelte/transition';
 	import { CameraIcon, Home, ImageIcon, LogIn, Menu, User2, X } from 'lucide-svelte';
 	import ProfileIcon from '../studio/ProfileIcon.svelte';
 	import ToggleMode from '$lib/home/comps/ToggleMode.svelte';
-	import { emailStatus } from '$lib/state';
 
 	let allData = {
-		title: 'Photix',
+		title: 'Shutterspot',
 		img: HomeIcon,
 		navs: [
 			{
