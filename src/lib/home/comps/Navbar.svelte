@@ -24,12 +24,12 @@
 				name: 'Collection',
 				link: '/photos',
 				icon: ImageIcon
-			},
-			{
-				name: 'About Us',
-				link: '/',
-				icon: User2
 			}
+			// {
+			// 	name: 'About Us',
+			// 	link: '/',
+			// 	icon: User2
+			// }
 		]
 	};
 	let isOpen = false;

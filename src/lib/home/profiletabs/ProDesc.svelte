@@ -26,6 +26,8 @@
 		}
 	];
 	export let details = {
+		id: 0,
+		username: 'cod',
 		about: '',
 		skills: '',
 		expertIn: ''
