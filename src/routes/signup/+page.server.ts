@@ -62,10 +62,10 @@ export const actions: Actions = {
                 userId: user.userId,
                 attributes: {}
             });
-            // const { data, error } = await supabase.auth.signUp({
-            //     email: email,
-            //     password: password,
-            // })
+            const { data, error } = await supabase.auth.signUp({
+                email: email,
+                password: password,
+            })
             locals.auth.setSession(session); // set session cookie
         } catch (e) {
             console.log(e);
