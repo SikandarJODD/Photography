@@ -26,7 +26,7 @@
 					<Carousel.Item>
 						<div>
 							<Card.Root class=" rounded-[2%] border-none">
-								<Card.Content class="flex p-0  dark:bg-gray-800/40  items-center justify-center">
+								<Card.Content class="flex p-0 items-center justify-center">
 									<img
 										src={item.img}
 										alt={item.username}

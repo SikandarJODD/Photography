@@ -12,7 +12,6 @@
 	export let isUsername: string;
 	let user = $page.params.id;
 	let userText = '';
-	let isOpen = false;
 
 	let sendNotify = async () => {
 		if (userText === '') {

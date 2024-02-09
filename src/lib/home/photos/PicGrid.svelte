@@ -1,4 +1,9 @@
 <script lang="ts">
+	import { page } from '$app/stores';
+	import DeleteImage from './DeleteImage.svelte';
+
+	let isProfilePage = $page.url.pathname === '/profile';
+
 	export let allimages: any;
 </script>
 
@@ -27,6 +32,13 @@
 					class="hidden transition-all duration-500 group-hover:inline-block relative ml-4 mb-3 text-sm text-white md:ml-5 md:text-sm"
 					>{item.caption}</span
 				>
+				{#if isProfilePage}
+					<span
+						class="absolute top-2 right-2 transition-all duration-500 ml-4 mb-3 text-sm text-white md:ml-5 md:text-sm"
+					>
+						<DeleteImage imgData={item} />
+					</span>
+				{/if}
 			</div>
 		{/each}
 	</div>
