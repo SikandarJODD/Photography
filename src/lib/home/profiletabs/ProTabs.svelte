@@ -50,9 +50,6 @@
 {#if featuresData.length === 0}
 	<div>
 		<p>Information Not filled</p>
-		<span>
-			Go to <a href="/edit">Edit</a> to fill the information
-		</span>
 	</div>
 {:else}
 	<Tabs.Root value="basic" class="w-[400px] ">

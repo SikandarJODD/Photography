@@ -7,25 +7,21 @@ import type { Actions, PageServerLoad } from "./$types";
 import { redirect } from "@sveltejs/kit";
 export const load: PageServerLoad = async ({ locals }) => {
     let session = await locals.auth.validate();
+    console.log('Session', session);
     if (session) {
         let username = session.user.username;
+        console.log('Session', session.user.username);
+
         let data = await db.select().from(profile).where(eq(profile.username, String(username)));
         let feature = await db.select().from(featureStuff).where(eq(featureStuff.username, String(username)));
         let userDetail = await db.select().from(userDetailInfo).where(eq(userDetailInfo.username, String(username)));
-        // console.log('Data', data);
-        // console.log('Feature', feature);
-        // console.log('User Detail', userDetail);
         return {
             info: data[0],
             feature: feature[0],
             userDetail: userDetail[0]
         }
     }
-    else {
-        redirect(302, '/login');
-    }
-
-
+    throw redirect(302, '/login');
 }
 
 export const actions: Actions = {

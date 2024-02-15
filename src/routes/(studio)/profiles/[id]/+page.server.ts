@@ -5,12 +5,10 @@ import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({ url, params }) => {
     let userd = params.id;
-    console.log(userd, 'Username');
 
     let userPosts = await db.select().from(posts).where(eq(posts.username, userd));
     let fprofilUser = await db.select().from(featureStuff).where(eq(featureStuff.username, userd));
     let fdetails = await db.select().from(userDetailInfo).where(eq(userDetailInfo.username, userd));
-    console.log(fdetails, 'User Details');
 
     return {
         userPosts: userPosts,
