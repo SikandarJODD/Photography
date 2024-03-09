@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Hero from '$lib/home/comps/Hero.svelte';
+	import HomeImgGallery from '$lib/home/comps/HomeImgGallery.svelte';
 	// import { createClient } from 'pexels';
 
 	// const client = createClient('Qtf7NDGG6DxHD1W7AKxEyqazP8GLbttX298hIw4To4hV8lqbJMRyppgd');
@@ -12,3 +13,4 @@
 </script>
 
 <Hero />
+<HomeImgGallery />
