@@ -1,11 +1,13 @@
 <script>
+	import ImgdownGallery from '$lib/home/photos/imgdownGallery.svelte';
 	import { page } from '$app/stores';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import { Toaster } from '$lib/components/ui/sonner';
 	import { toast } from 'svelte-sonner';
 
 	export let data;
-	console.log(data.rallPosts, 'R All Posts');
+	// console.log(data.rallPosts, 'R All Posts');
+	console.log(data.allposts);
 	// console.log(data);
 	/* 
 	 rprofile :{
@@ -30,9 +32,9 @@
 		Shutterspot - {data.rpost.username}
 	</title>
 </svelte:head>
-<div class="mx-28">
+<div class="md:mx-20">
 	<div class="w-full flex flex-col md:flex-row">
-		<div class="md:w-1/2 flex items-center justify-center group">
+		<div class="md:w-1/2 mt-4 md:mt-0 flex items-center justify-center group">
 			<div
 				class="border p-0 md:p-3 rounded-md md:rounded-3xl transition-all duration-200 dark:group-hover:bg-gray-900/40"
 			>
@@ -43,7 +45,7 @@
 				/>
 			</div>
 		</div>
-		<div class="w-1/2 flex gap-4 flex-col">
+		<div class="md:w-1/2 mt-6 md:mt-0 flex gap-4 flex-col">
 			<div class="flex flex-col items-start gap-1 border px-6 py-3 rounded-md md:rounded-xl">
 				<h1>
 					<a href="/profiles/{data.rpost.username}" class="flex items-center gap-1.5"
@@ -153,21 +155,25 @@
 					</Button>
 				</div>
 			</div>
-			<div class="flex flex-wrap gap-2 border px-6 py-4 rounded-md md:rounded-2xl">
-				{#each data.rallPosts.slice(0, 8) as item}
+			<div
+				class="flex justify-center flex-wrap gap-2 border md:px-6 py-4 rounded-md md:rounded-2xl"
+			>
+				{#each data.rallPosts.slice(0, 6) as item}
 					<a
 						class="flex p-2 border rounded-md md:rounded-lg shadow-md md:shadow-lg transition-all duration-200 hover:shadow-xl dark:hover:bg-gray-900/40 border-primary/20 hover:border-cyan-400/50"
-						href="https://photix.vercel.app/photos/{item.id}"
-						target="_blank"
+						href="/photos/{item.id}"
 					>
 						<img
 							src={item.img}
 							alt="{item.username} image"
-							class="h-20 w-20 object-cover rounded-md md:rounded-lg shadow-md md:shadow-lg"
+							class="h-20 w-20 md:h-20 md:w-20 object-cover rounded-md md:rounded-lg shadow-md md:shadow-lg"
 						/>
 					</a>
 				{/each}
 			</div>
 		</div>
 	</div>
+</div>
+<div>
+	<ImgdownGallery allPublicPosts={data.allposts} />
 </div>
