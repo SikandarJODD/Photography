@@ -38,6 +38,7 @@
 		"@lucia-auth/adapter-postgresql": "^2.0.2",
 		"@supabase/supabase-js": "^2.38.5",
 		"bits-ui": "^0.9.9",
+		"cloudinary": "^2.1.0",
 		"clsx": "^2.0.0",
 		"cmdk-sv": "^0.0.12",
 		"dotenv": "^16.3.1",

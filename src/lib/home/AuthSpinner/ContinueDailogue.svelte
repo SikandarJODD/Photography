@@ -20,7 +20,7 @@
 			try {
 				let data = await supabase
 					.from('chat')
-					.insert({ sender: user, receiver: isUsername, desc: userText, type: $tabSelected });
+					.insert({ sender: isUsername, receiver: user, desc: userText, type: $tabSelected });
 				console.log(data, 'Data');
 			} catch (e) {
 				console.log(e);
